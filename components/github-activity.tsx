@@ -1,78 +1,124 @@
-"use client"
+"use client";
 
-import { useLanguage } from "@/contexts/language-context"
-import { Github } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useLanguage } from "@/contexts/language-context";
+import { Github } from "lucide-react";
+import { useEffect, useState } from "react";
+
+type Day = { date: string; contributionCount: number };
 
 export function GitHubActivity() {
-  const { t } = useLanguage()
-  const [mounted, setMounted] = useState(false)
+  const { t } = useLanguage();
+  const [mounted, setMounted] = useState(false);
+  const [weeks, setWeeks] = useState<Day[][] | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
 
-  // Generate random contribution data
-  const generateContributions = () => {
-    const weeks = 15
-    const days = 7
-    const contributions: number[][] = []
+    const load = async () => {
+      try {
+        const res = await fetch("/api/github-contributions");
+        if (!res.ok) {
+          const j = await res.json().catch(() => null);
+          setError(j?.error || "Failed to fetch contributions");
+          return;
+        }
+        const json = await res.json();
+        const weeksData =
+          json?.data?.user?.contributionsCollection?.contributionCalendar
+            ?.weeks || [];
 
-    for (let w = 0; w < weeks; w++) {
-      const week: number[] = []
-      for (let d = 0; d < days; d++) {
-        week.push(Math.floor(Math.random() * 5))
+        const mapped: Day[][] = weeksData.map((w: any) =>
+          w.contributionDays.map((d: any) => ({
+            date: d.date,
+            contributionCount: d.contributionCount,
+          }))
+        );
+        setWeeks(mapped.slice(-20));
+      } catch (err: any) {
+        setError(err.message || String(err));
       }
-      contributions.push(week)
-    }
-    return contributions
-  }
+    };
 
-  const contributions = generateContributions()
+    load();
+  }, []);
 
-  const getColor = (level: number) => {
-    const colors = ["bg-[#1a1a24]", "bg-purple-900/40", "bg-purple-700/50", "bg-purple-500/60", "bg-purple-400/80"]
-    return colors[level] || colors[0]
-  }
+  const getColor = (count: number) => {
+    if (count <= 0) return "bg-[#1a1a24]";
+    if (count === 1) return "bg-purple-900/40";
+    if (count < 4) return "bg-purple-700/50";
+    if (count < 8) return "bg-purple-500/60";
+    return "bg-purple-400/80";
+  };
 
   if (!mounted) {
     return (
-      <div className="bg-[#12121a] rounded-2xl p-6 border border-white/5">
-        <div className="skeleton h-8 w-48 rounded mb-6" />
-        <div className="skeleton h-32 rounded" />
+      <div className="bg-[#12121a] rounded-2xl overflow-hidden border border-white/5">
+        <div className="p-6 pb-0">
+          <div className="skeleton h-8 w-48 rounded mb-6" />
+        </div>
+        <div className="relative h-80 mt-4">
+          <div className="skeleton h-full rounded" />
+        </div>
       </div>
-    )
+    );
   }
 
   return (
-    <div className="bg-[#12121a] rounded-2xl p-6 border border-white/5 hover:border-purple-500/30 transition-all duration-300">
-      <div className="flex items-center gap-3 mb-6">
+    <div className="bg-[#12121a] rounded-2xl overflow-hidden border border-white/5 hover:border-purple-500/30 transition-all duration-300">
+      <div className="flex items-center gap-3 p-6 pb-0">
         <Github className="w-6 h-6 text-white" />
-        <h3 className="text-lg font-semibold text-white">{t.sections.githubActivity}</h3>
+        <h3 className="text-lg font-semibold text-white">
+          {t.sections.githubActivity}
+        </h3>
       </div>
 
-      <div className="flex gap-1 overflow-hidden">
-        {contributions.map((week, weekIndex) => (
-          <div key={weekIndex} className="flex flex-col gap-1">
-            {week.map((level, dayIndex) => (
+      <div className="relative h-80 mt-4 px-6">
+        {error && <div className="text-sm text-destructive mb-4">{error}</div>}
+
+        <div className="flex gap-2 overflow-x-auto pb-2">
+          {weeks ? (
+            weeks.map((week, weekIndex) => (
+              <div key={weekIndex} className="flex flex-col gap-2">
+                {week.map((day, dayIndex) => (
+                  <div
+                    key={`${weekIndex}-${dayIndex}`}
+                    title={`${day.date}: ${day.contributionCount} contribution(s)`}
+                    className={`${getColor(
+                      day.contributionCount
+                    )} w-4 h-4 transition-all duration-200 hover:scale-110`}
+                  />
+                ))}
+              </div>
+            ))
+          ) : (
+            <div className="text-sm text-muted-foreground">
+              Carregando contribuições...
+            </div>
+          )}
+        </div>
+
+        <div className="flex items-center justify-end gap-2 mt-4 text-sm text-muted-foreground">
+          <span>{t.common.less}</span>
+          <div className="flex gap-2">
+            {[0, 1, 2, 3, 4].map((level) => (
               <div
-                key={`${weekIndex}-${dayIndex}`}
-                className={`w-3 h-3 rounded-sm ${getColor(level)} transition-all duration-300 hover:scale-125`}
+                key={level}
+                className={`w-4 h-4 ${
+                  [
+                    "bg-[#1a1a24]",
+                    "bg-purple-900/40",
+                    "bg-purple-700/50",
+                    "bg-purple-500/60",
+                    "bg-purple-400/80",
+                  ][level]
+                }`}
               />
             ))}
           </div>
-        ))}
-      </div>
-
-      <div className="flex items-center justify-end gap-2 mt-4 text-xs text-muted-foreground">
-        <span>{t.common.less}</span>
-        <div className="flex gap-1">
-          {[0, 1, 2, 3, 4].map((level) => (
-            <div key={level} className={`w-3 h-3 rounded-sm ${getColor(level)}`} />
-          ))}
+          <span>{t.common.more}</span>
         </div>
-        <span>{t.common.more}</span>
       </div>
     </div>
-  )
+  );
 }
