@@ -3,6 +3,7 @@
 import { useLanguage } from "@/contexts/language-context";
 import { Github } from "lucide-react";
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 
 type Day = { date: string; contributionCount: number };
 
@@ -10,6 +11,7 @@ export function GitHubActivity() {
   const { t } = useLanguage();
   const [mounted, setMounted] = useState(false);
   const [weeks, setWeeks] = useState<Day[][] | null>(null);
+  const [username, setUsername] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -35,6 +37,7 @@ export function GitHubActivity() {
           }))
         );
         setWeeks(mapped.slice(-20));
+        setUsername(json?.data?.user?.login || null);
       } catch (err: any) {
         setError(err.message || String(err));
       }
@@ -117,6 +120,28 @@ export function GitHubActivity() {
             ))}
           </div>
           <span>{t.common.more}</span>
+        </div>
+
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
+          <Button
+            variant="outline"
+            asChild
+            className="bg-white/5 border-white/10 text-white hover:bg-white/10 hover:text-purple-500 transition-colors rounded-full px-4 py-2"
+          >
+            <a
+              href={
+                username
+                  ? `https://github.com/${username}`
+                  : "https://github.com"
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2"
+            >
+              <Github className="w-4 h-4" />
+              {"Entrar no GitHub"}
+            </a>
+          </Button>
         </div>
       </div>
     </div>

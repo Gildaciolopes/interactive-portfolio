@@ -28,6 +28,7 @@ export async function GET(req: Request) {
     const query = `
       query($login: String!) {
         user(login: $login) {
+          login
           contributionsCollection {
             contributionCalendar {
               totalContributions
