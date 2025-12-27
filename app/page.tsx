@@ -84,17 +84,51 @@ export default function HomePage() {
 
             {/* Stack Icons */}
             <div className="flex items-center gap-4 pt-4">
-              <div className="w-8 h-8 rounded-lg bg-cyan-500/20 flex items-center justify-center text-cyan-400">
-                ⚛️
+              <div className="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center">
+                <Image
+                  src="/images/typescript.svg"
+                  alt="TypeScript"
+                  width={20}
+                  height={20}
+                  className="object-contain"
+                />
               </div>
-              <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-white font-bold text-sm">
-                N
+              <div className="w-8 h-8 rounded-lg bg-cyan-500/20 flex items-center justify-center">
+                <Image
+                  src="/images/react.svg"
+                  alt="React"
+                  width={20}
+                  height={20}
+                  className="object-contain"
+                />
               </div>
-              <div className="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400 font-bold text-xs">
-                TS
+              <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
+                <Image
+                  src="/images/nextjs2.svg"
+                  alt="Next.js"
+                  width={20}
+                  height={20}
+                  className="object-contain"
+                />
               </div>
-              <div className="w-8 h-8 rounded-lg bg-yellow-500/20 flex items-center justify-center text-yellow-400 font-bold text-xs">
-                JS
+
+              <div className="w-8 h-8 rounded-lg bg-green-500/20 flex items-center justify-center">
+                <Image
+                  src="/images/nodejs.svg"
+                  alt="Node.js"
+                  width={20}
+                  height={20}
+                  className="object-contain"
+                />
+              </div>
+              <div className="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center">
+                <Image
+                  src="/images/postgresql.svg"
+                  alt="PostgreSQL"
+                  width={20}
+                  height={20}
+                  className="object-contain"
+                />
               </div>
             </div>
           </div>
