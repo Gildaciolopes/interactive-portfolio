@@ -76,7 +76,7 @@ export function GitHubActivity() {
       <div className="relative h-80 mt-4 px-6">
         {error && <div className="text-sm text-destructive mb-4">{error}</div>}
 
-        <div className="flex gap-2 overflow-x-auto pb-2">
+        <div className="flex gap-2 overflow-x-auto pt-8 pb-2 justify-center items-center">
           {weeks ? (
             weeks.map((week, weekIndex) => (
               <div key={weekIndex} className="flex flex-col gap-2">
@@ -86,7 +86,7 @@ export function GitHubActivity() {
                     title={`${day.date}: ${day.contributionCount} contribution(s)`}
                     className={`${getColor(
                       day.contributionCount
-                    )} w-4 h-4 transition-all duration-200 hover:scale-110`}
+                    )} w-4 h-4 rounded-xs transition-all duration-200 hover:scale-110`}
                   />
                 ))}
               </div>
@@ -104,7 +104,7 @@ export function GitHubActivity() {
             {[0, 1, 2, 3, 4].map((level) => (
               <div
                 key={level}
-                className={`w-4 h-4 ${
+                className={`w-4 h-4 rounded-xs ${
                   [
                     "bg-[#1a1a24]",
                     "bg-purple-900/40",
