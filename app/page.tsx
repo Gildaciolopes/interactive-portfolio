@@ -26,12 +26,14 @@ export default function HomePage() {
           {/* Left Content */}
           <div className="space-y-8">
             <div className="space-y-4">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
-                Building the future{" "}
-                <span className="text-muted-foreground">of</span>
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+                {t.hero.titleMain}{" "}
+                <span className="text-muted-foreground">
+                  {t.hero.titleSmall}
+                </span>
                 <br />
                 <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-purple-500">
-                  scalable platforms
+                  {t.hero.titleHighlight}
                 </span>
                 <span className="text-cyan-400">.</span>
               </h1>

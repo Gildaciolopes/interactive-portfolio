@@ -13,6 +13,9 @@ interface Translations {
     contact: string;
   };
   hero: {
+    titleMain?: string;
+    titleSmall?: string;
+    titleHighlight?: string;
     greeting: string;
     role: string;
     experience: string;
@@ -66,6 +69,9 @@ const translations: Record<Language, Translations> = {
       contact: "Contact",
     },
     hero: {
+      titleMain: "Developing",
+      titleSmall: "the",
+      titleHighlight: "future",
       greeting: "I'm",
       role: "Mid-Level Full Stack Developer at",
       experience:
@@ -118,6 +124,9 @@ const translations: Record<Language, Translations> = {
       contact: "Contato",
     },
     hero: {
+      titleMain: "Desenvolvendo",
+      titleSmall: "o",
+      titleHighlight: "futuro",
       greeting: "Eu sou",
       role: "Desenvolvedor Full Stack Pleno na",
       experience:
