@@ -37,12 +37,16 @@ export default function HomePage() {
               </h1>
 
               <p className="text-lg text-muted-foreground max-w-lg">
-                {t.hero.greeting}{" "}
-                <span className="text-white font-semibold">Gildácio Lopes</span>
-                , {t.hero.role}{" "}
-                <code className="px-2 py-1 bg-white/10 rounded text-sm text-white">
-                  Medsafe Brasil
-                </code>
+                {t.hero.role}{" "}
+                <a
+                  href="https://medsafebrasil.com.br"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <code className="px-2 py-1 bg-white/10 rounded text-sm text-white hover:text-purple-400 transition-colors">
+                    Medsafe Brasil
+                  </code>
+                </a>
               </p>
               <p className="text-muted-foreground">{t.hero.experience}</p>
             </div>

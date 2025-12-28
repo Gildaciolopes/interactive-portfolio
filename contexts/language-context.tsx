@@ -67,7 +67,7 @@ const translations: Record<Language, Translations> = {
     },
     hero: {
       greeting: "I'm",
-      role: "Full Stack Developer at",
+      role: "Mid-Level Full Stack Developer at",
       experience:
         "With 3+ years of experience, building high-performance web and mobile solutions for SaaS & General Softwares.",
       cta: {
