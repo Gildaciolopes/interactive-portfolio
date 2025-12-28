@@ -79,7 +79,7 @@ export function GitHubActivity() {
       <div className="relative h-80 mt-4 px-6">
         {error && <div className="text-sm text-destructive mb-4">{error}</div>}
 
-        <div className="flex gap-2 overflow-x-auto pt-8 pb-2 justify-center items-center">
+        <div className="flex gap-2 overflow-x-auto pt-8 pb-2 justify-center items-start">
           {weeks ? (
             weeks.map((week, weekIndex) => (
               <div key={weekIndex} className="flex flex-col gap-2">
