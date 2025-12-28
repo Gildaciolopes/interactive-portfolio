@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 interface TerminalLine {
-  type: "comment" | "keyword" | "interface" | "property" | "cursor";
+  type: "comment" | "keyword" | "const" | "class" | "property" | "cursor";
   content: string;
   delay?: number;
 }
@@ -15,14 +15,37 @@ const codeLines: TerminalLine[] = [
     delay: 50,
   },
   { type: "keyword", content: "", delay: 100 },
-  { type: "interface", content: "interface FullStackDeveloper {", delay: 30 },
-  { type: "property", content: '  name: "Gildácio Lopes";', delay: 40 },
-  { type: "property", content: '  role: "Full Stack Developer";', delay: 40 },
-  { type: "property", content: '  company: "Medsafe Brasil";', delay: 40 },
-  { type: "property", content: '  experience: "3+ years";', delay: 40 },
-  { type: "property", content: '  location: "Teresina, PI";', delay: 40 },
-  { type: "property", content: '  birth: "25 de Dezembro, 2006";', delay: 40 },
-  { type: "cursor", content: "}", delay: 0 },
+  { type: "const", content: "const FullStackDeveloper = {", delay: 30 },
+  { type: "property", content: '  name: "Gildácio Lopes",', delay: 40 },
+  { type: "property", content: '  role: "Full Stack Developer",', delay: 40 },
+  { type: "property", content: '  company: "Medsafe Brasil",', delay: 40 },
+  { type: "property", content: '  experience: "3+ years",', delay: 40 },
+  { type: "property", content: '  location: "Teresina, PI",', delay: 40 },
+  { type: "property", content: '  birth: "25 de Dezembro, 2006",', delay: 40 },
+  { type: "cursor", content: "};", delay: 0 },
+  { type: "keyword", content: "", delay: 100 },
+  { type: "class", content: "const TechStack = {", delay: 30 },
+  {
+    type: "property",
+    content: '  frontend: ["React", "Next.js", "TailwindCSS"],',
+    delay: 40,
+  },
+  {
+    type: "property",
+    content: '  backend: ["Node.js", "Express", "NestJS"],',
+    delay: 40,
+  },
+  {
+    type: "property",
+    content: '  database: ["MongoDB", "PostgreSQL"],',
+    delay: 40,
+  },
+  {
+    type: "property",
+    content: '  tools: ["Git", "Docker", "AWS", "Jest"],',
+    delay: 40,
+  },
+  { type: "cursor", content: "};", delay: 0 },
 ];
 
 export function TerminalTyping() {
@@ -71,8 +94,8 @@ export function TerminalTyping() {
       return <span className="text-emerald-400/70 italic">{line}</span>;
     }
 
-    if (originalLine.type === "interface") {
-      const match = line.match(/^(interface)\s+(\w+)\s*(\{?)$/);
+    if (originalLine.type === "const" || originalLine.type === "class") {
+      const match = line.match(/^(const|class)\s+(\w+)(?:\s*=\s*)?\s*(\{?)$/);
       if (match) {
         return (
           <>
@@ -86,15 +109,56 @@ export function TerminalTyping() {
     }
 
     if (originalLine.type === "property") {
-      const match = line.match(/^(\s*)(\w+):\s*"([^"]+)"(;?)$/);
+      const match = line.match(/^(\s*)(\w+):\s*(.+?)([;,]?)$/);
       if (match) {
+        const indent = match[1];
+        const key = match[2];
+        const value = match[3];
+        const terminator = match[4] || "";
+
+        const renderValue = (val: string) => {
+          const leadingSpacesMatch = val.match(/^(\s*)/);
+          const leadingSpaces = leadingSpacesMatch ? leadingSpacesMatch[1] : "";
+          const rest = val.slice(leadingSpaces.length);
+          if (rest.startsWith("[") && rest.endsWith("]")) {
+            const inner = rest.slice(1, -1);
+            const tokens = inner.match(/"[^"]*"|,|[^,]+/g) || [];
+            return (
+              <>
+                <span className="text-white">{leadingSpaces}</span>
+                <span className="text-purple-400">[</span>
+                {tokens.map((tok, i) => {
+                  if (tok === ",") {
+                    return (
+                      <span key={i} className="text-white">
+                        {tok}
+                      </span>
+                    );
+                  }
+                  const leadMatch = tok.match(/^\s*/);
+                  const lead = leadMatch ? leadMatch[0] : "";
+                  const content = tok.slice(lead.length);
+                  return (
+                    <span key={i}>
+                      <span className="text-white">{lead}</span>
+                      <span className="text-green-400">{content}</span>
+                    </span>
+                  );
+                })}
+                <span className="text-purple-400">]</span>
+              </>
+            );
+          }
+          return <span className="text-green-400">{val}</span>;
+        };
+
         return (
           <>
-            <span className="text-white">{match[1]}</span>
-            <span className="text-blue-300">{match[2]}</span>
+            <span className="text-white">{indent}</span>
+            <span className="text-blue-300">{key}</span>
             <span className="text-white">: </span>
-            <span className="text-green-400">"{match[3]}"</span>
-            <span className="text-white">{match[4]}</span>
+            {renderValue(value)}
+            <span className="text-white">{terminator}</span>
           </>
         );
       }
