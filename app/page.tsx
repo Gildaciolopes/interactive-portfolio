@@ -64,8 +64,8 @@ export default function HomePage() {
                 </Link>
               </Button>
               <Button
-                variant="outline"
-                className="border-white/20 text-white hover:bg-white/10 rounded-full px-6 bg-transparent"
+                variant="ghost"
+                className="text-white border border-transparent rounded-full px-6 cursor-pointer transition-colors hover:text-white hover:bg-transparent! hover:border hover:border-white/70"
               >
                 <Download className="w-4 h-4 mr-2" />
                 {t.hero.cta.cv}
@@ -73,7 +73,7 @@ export default function HomePage() {
               <Button
                 variant="ghost"
                 asChild
-                className="text-white hover:bg-white/10 rounded-full px-6"
+                className="text-white border border-transparent rounded-full px-6 cursor-pointer transition-colors hover:text-white hover:bg-transparent! hover:border hover:border-white/70"
               >
                 <Link href="/about">
                   <Image
