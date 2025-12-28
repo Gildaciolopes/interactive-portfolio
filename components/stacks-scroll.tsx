@@ -26,21 +26,21 @@ const stacks = [
 export function StacksScroll() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [isPaused, setIsPaused] = useState(false);
+  const scrollPositionRef = useRef(0);
 
   useEffect(() => {
     const scrollContainer = scrollRef.current;
     if (!scrollContainer) return;
 
     let animationFrameId: number;
-    let scrollPosition = 0;
 
     const scroll = () => {
       if (!isPaused && scrollContainer) {
-        scrollPosition += 0.5;
-        if (scrollPosition >= scrollContainer.scrollWidth / 2) {
-          scrollPosition = 0;
+        scrollPositionRef.current += 1;
+        if (scrollPositionRef.current >= scrollContainer.scrollWidth / 2) {
+          scrollPositionRef.current = 0;
         }
-        scrollContainer.scrollLeft = scrollPosition;
+        scrollContainer.scrollLeft = scrollPositionRef.current;
       }
       animationFrameId = requestAnimationFrame(scroll);
     };
