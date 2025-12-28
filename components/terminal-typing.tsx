@@ -1,15 +1,19 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
 interface TerminalLine {
-  type: "comment" | "keyword" | "interface" | "property" | "cursor"
-  content: string
-  delay?: number
+  type: "comment" | "keyword" | "interface" | "property" | "cursor";
+  content: string;
+  delay?: number;
 }
 
 const codeLines: TerminalLine[] = [
-  { type: "comment", content: "// Gildácio Lopes - Full Stack Developer Profile", delay: 50 },
+  {
+    type: "comment",
+    content: "// Gildácio Lopes - Full Stack Developer Profile",
+    delay: 50,
+  },
   { type: "keyword", content: "", delay: 100 },
   { type: "interface", content: "interface FullStackDeveloper {", delay: 30 },
   { type: "property", content: '  name: "Gildácio Lopes";', delay: 40 },
@@ -19,53 +23,56 @@ const codeLines: TerminalLine[] = [
   { type: "property", content: '  location: "Teresina, PI";', delay: 40 },
   { type: "property", content: '  birth: "25 de Dezembro, 2006";', delay: 40 },
   { type: "cursor", content: "}", delay: 0 },
-]
+];
 
 export function TerminalTyping() {
-  const [displayedLines, setDisplayedLines] = useState<string[]>([])
-  const [currentLineIndex, setCurrentLineIndex] = useState(0)
-  const [currentCharIndex, setCurrentCharIndex] = useState(0)
-  const [isTyping, setIsTyping] = useState(true)
+  const [displayedLines, setDisplayedLines] = useState<string[]>([]);
+  const [currentLineIndex, setCurrentLineIndex] = useState(0);
+  const [currentCharIndex, setCurrentCharIndex] = useState(0);
+  const [isTyping, setIsTyping] = useState(true);
 
   useEffect(() => {
     if (currentLineIndex >= codeLines.length) {
-      setIsTyping(false)
-      return
+      setIsTyping(false);
+      return;
     }
 
-    const currentLine = codeLines[currentLineIndex]
-    const lineContent = currentLine.content
+    const currentLine = codeLines[currentLineIndex];
+    const lineContent = currentLine.content;
 
     if (currentCharIndex < lineContent.length) {
       const timeout = setTimeout(() => {
         setDisplayedLines((prev) => {
-          const newLines = [...prev]
-          newLines[currentLineIndex] = lineContent.slice(0, currentCharIndex + 1)
-          return newLines
-        })
-        setCurrentCharIndex((prev) => prev + 1)
-      }, currentLine.delay || 30)
-      return () => clearTimeout(timeout)
+          const newLines = [...prev];
+          newLines[currentLineIndex] = lineContent.slice(
+            0,
+            currentCharIndex + 1
+          );
+          return newLines;
+        });
+        setCurrentCharIndex((prev) => prev + 1);
+      }, currentLine.delay || 30);
+      return () => clearTimeout(timeout);
     } else {
       const timeout = setTimeout(() => {
-        setCurrentLineIndex((prev) => prev + 1)
-        setCurrentCharIndex(0)
-        setDisplayedLines((prev) => [...prev, ""])
-      }, 200)
-      return () => clearTimeout(timeout)
+        setCurrentLineIndex((prev) => prev + 1);
+        setCurrentCharIndex(0);
+        setDisplayedLines((prev) => [...prev, ""]);
+      }, 200);
+      return () => clearTimeout(timeout);
     }
-  }, [currentLineIndex, currentCharIndex])
+  }, [currentLineIndex, currentCharIndex]);
 
   function renderLine(line: string, index: number) {
-    const originalLine = codeLines[index]
-    if (!originalLine) return line
+    const originalLine = codeLines[index];
+    if (!originalLine) return line;
 
     if (originalLine.type === "comment") {
-      return <span className="text-emerald-400/70 italic">{line}</span>
+      return <span className="text-emerald-400/70 italic">{line}</span>;
     }
 
     if (originalLine.type === "interface") {
-      const match = line.match(/^(interface)\s+(\w+)\s*(\{?)$/)
+      const match = line.match(/^(interface)\s+(\w+)\s*(\{?)$/);
       if (match) {
         return (
           <>
@@ -73,13 +80,13 @@ export function TerminalTyping() {
             <span className="text-cyan-300"> {match[2]}</span>
             <span className="text-white"> {match[3]}</span>
           </>
-        )
+        );
       }
-      return <span className="text-white">{line}</span>
+      return <span className="text-white">{line}</span>;
     }
 
     if (originalLine.type === "property") {
-      const match = line.match(/^(\s*)(\w+):\s*"([^"]+)"(;?)$/)
+      const match = line.match(/^(\s*)(\w+):\s*"([^"]+)"(;?)$/);
       if (match) {
         return (
           <>
@@ -89,16 +96,16 @@ export function TerminalTyping() {
             <span className="text-green-400">"{match[3]}"</span>
             <span className="text-white">{match[4]}</span>
           </>
-        )
+        );
       }
-      return <span className="text-white">{line}</span>
+      return <span className="text-white">{line}</span>;
     }
 
     if (originalLine.type === "cursor") {
-      return <span className="text-white">{line}</span>
+      return <span className="text-white">{line}</span>;
     }
 
-    return line
+    return line;
   }
 
   return (
@@ -110,22 +117,32 @@ export function TerminalTyping() {
           <div className="w-3 h-3 rounded-full bg-yellow-500" />
           <div className="w-3 h-3 rounded-full bg-green-500" />
         </div>
-        <span className="text-sm text-muted-foreground font-mono">developer.ts</span>
+        <span className="text-sm text-muted-foreground font-mono">
+          developer.ts
+        </span>
         <span className="text-xs text-muted-foreground">TypeScript</span>
       </div>
 
       {/* Terminal Content */}
-      <div className="p-4 font-mono text-sm min-h-[280px]">
+      <div className="p-4 font-mono text-sm min-h-70">
         {displayedLines.map((line, index) => (
           <div key={index} className="flex">
-            <span className="text-muted-foreground w-8 text-right mr-4 select-none">{index + 1}</span>
-            <span className="flex-1">{renderLine(line, index)}</span>
+            <span className="text-muted-foreground w-8 text-right mr-4 select-none">
+              {index + 1}
+            </span>
+            <span className="flex-1 whitespace-pre">
+              {renderLine(line, index)}
+            </span>
           </div>
         ))}
         {isTyping && (
           <div className="flex">
-            <span className="text-muted-foreground w-8 text-right mr-4 select-none">{displayedLines.length + 1}</span>
-            <span className="typing-cursor text-white">|</span>
+            <span className="text-muted-foreground w-8 text-right mr-4 select-none">
+              {displayedLines.length + 1}
+            </span>
+            <span className="flex-1 whitespace-pre">
+              <span className="typing-cursor text-white">|</span>
+            </span>
           </div>
         )}
       </div>
@@ -137,5 +154,5 @@ export function TerminalTyping() {
         <span>Ln {codeLines.length}, Col 2</span>
       </div>
     </div>
-  )
+  );
 }
