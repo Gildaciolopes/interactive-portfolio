@@ -67,7 +67,7 @@ export function StacksScroll() {
               src={stack.icon}
               alt={stack.name}
               fill
-              className="object-contain"
+              className="object-contain rounded-xs"
             />
           </div>
           <span className="text-white font-medium whitespace-nowrap">
