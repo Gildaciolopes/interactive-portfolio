@@ -22,7 +22,7 @@ const codeLines: TerminalLine[] = [
   { type: "property", content: '  experience: "3+ years",', delay: 40 },
   { type: "property", content: '  location: "Teresina, PI",', delay: 40 },
   { type: "property", content: '  birth: "25 de Dezembro, 2006",', delay: 40 },
-  { type: "cursor", content: "};", delay: 0 },
+  { type: "cursor", content: "}", delay: 0 },
   { type: "keyword", content: "", delay: 100 },
   { type: "class", content: "const TechStack = {", delay: 30 },
   {
@@ -45,7 +45,7 @@ const codeLines: TerminalLine[] = [
     content: '  tools: ["Git", "Docker", "AWS", "Jest"],',
     delay: 40,
   },
-  { type: "cursor", content: "};", delay: 0 },
+  { type: "cursor", content: "}", delay: 0 },
 ];
 
 export function TerminalTyping() {
@@ -87,6 +87,19 @@ export function TerminalTyping() {
   }, [currentLineIndex, currentCharIndex]);
 
   function renderLine(line: string, index: number) {
+    const renderBraces = (text: string) =>
+      text.split("").map((ch, i) =>
+        ch === "{" || ch === "}" ? (
+          <span key={i} className="text-purple-400">
+            {ch}
+          </span>
+        ) : (
+          <span key={i} className="text-white">
+            {ch}
+          </span>
+        )
+      );
+
     const originalLine = codeLines[index];
     if (!originalLine) return line;
 
@@ -99,9 +112,9 @@ export function TerminalTyping() {
       if (match) {
         return (
           <>
-            <span className="text-purple-400">{match[1]}</span>
-            <span className="text-cyan-300"> {match[2]}</span>
-            <span className="text-white"> {match[3]}</span>
+            <span className="text-orange-400/70">{match[1]}</span>
+            <span className="text-cyan-300/90"> {match[2]}</span>
+            <span className="ml-1">{renderBraces(match[3] || "")}</span>
           </>
         );
       }
@@ -166,7 +179,7 @@ export function TerminalTyping() {
     }
 
     if (originalLine.type === "cursor") {
-      return <span className="text-white">{line}</span>;
+      return <>{renderBraces(line)}</>;
     }
 
     return line;
