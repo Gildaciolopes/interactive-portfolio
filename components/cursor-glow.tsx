@@ -1,48 +1,103 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
+
+const glowPositions = [
+  {
+    top: "10%",
+    left: "85%",
+    color: "rgba(139, 92, 246, 0.12)",
+    size: 1000,
+    delay: 0,
+  },
+  {
+    top: "60%",
+    left: "5%",
+    color: "rgba(168, 85, 247, 0.11)",
+    size: 1100,
+    delay: 4,
+  },
+  {
+    bottom: "15%",
+    right: "20%",
+    color: "rgba(139, 92, 246, 0.13)",
+    size: 1300,
+    delay: 1,
+  },
+];
 
 export function CursorGlow() {
-  const [position, setPosition] = useState({ x: 0, y: 0 })
-  const [isVisible, setIsVisible] = useState(false)
+  const [portalEl, setPortalEl] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY })
-      setIsVisible(true)
-    }
-
-    const handleMouseLeave = () => {
-      setIsVisible(false)
-    }
-
-    window.addEventListener("mousemove", handleMouseMove)
-    document.body.addEventListener("mouseleave", handleMouseLeave)
+    const el = document.createElement("div");
+    el.style.position = "fixed";
+    el.style.inset = "0";
+    el.style.pointerEvents = "none";
+    el.style.zIndex = String(1);
+    el.style.overflow = "hidden";
+    document.body.appendChild(el);
+    setPortalEl(el);
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove)
-      document.body.removeEventListener("mouseleave", handleMouseLeave)
-    }
-  }, [])
+      if (el.parentNode) el.parentNode.removeChild(el);
+      setPortalEl(null);
+    };
+  }, []);
 
-  if (!isVisible) return null
+  if (!portalEl) return null;
 
-  return (
-    <div
-      className="pointer-events-none fixed inset-0 z-30 transition-opacity duration-300"
-      style={{
-        background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, rgba(139, 92, 246, 0.15), transparent 40%)`,
-      }}
-    >
-      <div
-        className="absolute w-[300px] h-[300px] rounded-full"
-        style={{
-          left: position.x - 150,
-          top: position.y - 150,
-          background: `radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, rgba(139, 92, 246, 0.1) 30%, rgba(139, 92, 246, 0.05) 50%, transparent 70%)`,
-          filter: "blur(1px)",
-        }}
-      />
-    </div>
-  )
+  const glows = (
+    <>
+      {glowPositions.map((glow, index) => (
+        <div
+          key={index}
+          className="glow-orb"
+          style={{
+            position: "absolute",
+            width: glow.size,
+            height: glow.size,
+            top: glow.top,
+            left: glow.left,
+            right: glow.right,
+            bottom: glow.bottom,
+            transform: "translate(-50%, -50%)",
+            borderRadius: "50%",
+            background: `radial-gradient(circle, ${glow.color} 0%, transparent 70%)`,
+            filter: "blur(60px)",
+            opacity: 0.8,
+            animation: `float ${8 + index * 2}s ease-in-out infinite`,
+            animationDelay: `${glow.delay}s`,
+          }}
+        />
+      ))}
+      <style jsx global>{`
+        @keyframes float {
+          0%,
+          100% {
+            transform: translate(-50%, -50%) translateY(0px) scale(1);
+            opacity: 0.6;
+          }
+          25% {
+            transform: translate(-50%, -50%) translateY(-20px) translateX(10px)
+              scale(1.05);
+            opacity: 0.8;
+          }
+          50% {
+            transform: translate(-50%, -50%) translateY(0px) translateX(20px)
+              scale(1.1);
+            opacity: 0.7;
+          }
+          75% {
+            transform: translate(-50%, -50%) translateY(20px) translateX(10px)
+              scale(1.05);
+            opacity: 0.8;
+          }
+        }
+      `}</style>
+    </>
+  );
+
+  return createPortal(glows, portalEl);
 }
