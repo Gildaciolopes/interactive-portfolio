@@ -1,33 +1,41 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { DynamicIsland } from "@/components/dynamic-island"
-import { ScrollReveal } from "@/components/scroll-reveal"
-import { InteractiveMap } from "@/components/interactive-map"
-import { useLanguage } from "@/contexts/language-context"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Send, Phone, Mail, MapPin, Linkedin, Github, MessageCircle } from "lucide-react"
-import { useState } from "react"
+import type React from "react";
+import { DynamicIsland } from "@/components/dynamic-island";
+import { ScrollReveal } from "@/components/scroll-reveal";
+import { InteractiveMap } from "@/components/interactive-map";
+import { useLanguage } from "@/contexts/language-context";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Send,
+  Phone,
+  Mail,
+  MapPin,
+  Linkedin,
+  Github,
+  MessageCircle,
+} from "lucide-react";
+import { useState } from "react";
 
 export default function ContactPage() {
-  const { language, t } = useLanguage()
+  const { language, t } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
-  })
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    console.log(formData)
-    setIsSubmitting(false)
-    setFormData({ name: "", email: "", message: "" })
-  }
+    e.preventDefault();
+    setIsSubmitting(true);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    console.log(formData);
+    setIsSubmitting(false);
+    setFormData({ name: "", email: "", message: "" });
+  };
 
   return (
     <main className="min-h-screen">
@@ -37,8 +45,10 @@ export default function ContactPage() {
         <div className="max-w-6xl mx-auto">
           <ScrollReveal>
             <div className="flex items-center gap-4 mb-4">
-              <h1 className="text-4xl md:text-5xl font-bold text-white">{t.contact.title}</h1>
-              <div className="w-16 h-1 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full" />
+              <h1 className="text-4xl md:text-5xl font-bold text-white">
+                {t.contact.title}
+              </h1>
+              <div className="w-16 h-1 bg-linear-to-r from-purple-500 to-purple-600 rounded-full" />
             </div>
             <p className="text-muted-foreground text-lg mb-12 max-w-2xl">
               {language === "pt"
@@ -51,24 +61,28 @@ export default function ContactPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
               <a
                 href="tel:+5586998279477"
-                className="group relative overflow-hidden flex items-center gap-4 p-5 bg-gradient-to-br from-white/5 to-white/[0.02] rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300"
+                className="group relative overflow-hidden flex items-center gap-4 p-5 bg-linear-to-br from-white/5 to-white/2 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-600/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <div className="absolute inset-0 bg-linear-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="relative w-14 h-14 rounded-xl bg-linear-to-br from-purple-500/20 to-purple-600/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <Phone className="w-6 h-6 text-purple-400" />
                 </div>
                 <div className="relative">
-                  <p className="text-sm text-muted-foreground mb-1">{language === "pt" ? "Telefone" : "Phone"}</p>
-                  <p className="text-white font-semibold">+55 (86) 99827-9477</p>
+                  <p className="text-sm text-muted-foreground mb-1">
+                    {language === "pt" ? "Telefone" : "Phone"}
+                  </p>
+                  <p className="text-white font-semibold">
+                    +55 (86) 99827-9477
+                  </p>
                 </div>
               </a>
 
               <a
                 href="mailto:contato.gildaciolopes@gmail.com"
-                className="group relative overflow-hidden flex items-center gap-4 p-5 bg-gradient-to-br from-white/5 to-white/[0.02] rounded-2xl border border-white/10 hover:border-cyan-500/50 transition-all duration-300"
+                className="group relative overflow-hidden flex items-center gap-4 p-5 bg-linear-to-br from-white/5 to-white/2 rounded-2xl border border-white/10 hover:border-cyan-500/50 transition-all duration-300"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative w-14 h-14 rounded-xl bg-gradient-to-br from-cyan-500/20 to-cyan-600/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <div className="absolute inset-0 bg-linear-to-br from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="relative w-14 h-14 rounded-xl bg-linear-to-br from-cyan-500/20 to-cyan-600/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <Mail className="w-6 h-6 text-cyan-400" />
                 </div>
                 <div className="relative">
@@ -79,13 +93,18 @@ export default function ContactPage() {
                 </div>
               </a>
 
-              <div className="group relative overflow-hidden flex items-center gap-4 p-5 bg-gradient-to-br from-white/5 to-white/[0.02] rounded-2xl border border-white/10">
-                <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-green-500/20 to-green-600/20 flex items-center justify-center">
+              <div className="group relative overflow-hidden flex items-center gap-4 p-5 bg-linear-to-br from-white/5 to-white/2 rounded-2xl border border-white/10 hover:border-green-500/50 transition-all duration-300">
+                <div className="absolute inset-0 bg-linear-to-br from-green-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="w-14 h-14 rounded-xl bg-linear-to-br from-green-500/20 to-green-600/20 flex items-center justify-center group-hover:scale-110 transition-transform">
                   <MapPin className="w-6 h-6 text-green-400" />
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground mb-1">{language === "pt" ? "Localização" : "Location"}</p>
-                  <p className="text-white font-semibold">Teresina, PI - Brasil</p>
+                  <p className="text-sm text-muted-foreground mb-1">
+                    {language === "pt" ? "Localização" : "Location"}
+                  </p>
+                  <p className="text-white font-semibold">
+                    Teresina, PI - Brasil
+                  </p>
                 </div>
               </div>
             </div>
@@ -137,37 +156,53 @@ export default function ContactPage() {
 
           <ScrollReveal delay={200}>
             <div className="relative">
-              <div className="absolute -inset-1 bg-gradient-to-r from-purple-600/20 via-transparent to-cyan-600/20 rounded-3xl blur-xl opacity-50" />
+              <div className="absolute -inset-1  rounded-3xl blur-xl opacity-50" />
               <div className="relative bg-[#0f0f17] rounded-2xl p-8 md:p-10 border border-white/5">
                 <div className="flex items-center gap-3 mb-8">
                   <div className="w-10 h-10 rounded-xl bg-purple-500/20 flex items-center justify-center">
                     <Send className="w-5 h-5 text-purple-400" />
                   </div>
                   <h2 className="text-2xl font-bold text-white">
-                    {language === "pt" ? "Envie uma mensagem" : "Send a message"}
+                    {language === "pt"
+                      ? "Envie uma mensagem"
+                      : "Send a message"}
                   </h2>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-sm text-muted-foreground">{t.contact.name}</label>
+                      <label className="text-sm text-muted-foreground">
+                        {t.contact.name}
+                      </label>
                       <Input
                         type="text"
-                        placeholder={language === "pt" ? "Seu nome completo" : "Your full name"}
+                        placeholder={
+                          language === "pt"
+                            ? "Seu nome completo"
+                            : "Your full name"
+                        }
                         value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, name: e.target.value })
+                        }
                         className="bg-[#1a1a24] border-white/10 text-white placeholder:text-muted-foreground/50 focus:border-purple-500/50 focus:ring-purple-500/20 rounded-xl h-12"
                         required
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm text-muted-foreground">{t.contact.email}</label>
+                      <label className="text-sm text-muted-foreground">
+                        {t.contact.email}
+                      </label>
                       <Input
                         type="email"
-                        placeholder={language === "pt" ? "seu@email.com" : "your@email.com"}
+                        placeholder={
+                          language === "pt" ? "seu@email.com" : "your@email.com"
+                        }
                         value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        onChange={(e) =>
+                          setFormData({ ...formData, email: e.target.value })
+                        }
                         className="bg-[#1a1a24] border-white/10 text-white placeholder:text-muted-foreground/50 focus:border-purple-500/50 focus:ring-purple-500/20 rounded-xl h-12"
                         required
                       />
@@ -175,12 +210,20 @@ export default function ContactPage() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm text-muted-foreground">{t.contact.message}</label>
+                    <label className="text-sm text-muted-foreground">
+                      {t.contact.message}
+                    </label>
                     <Textarea
-                      placeholder={language === "pt" ? "Escreva sua mensagem aqui..." : "Write your message here..."}
+                      placeholder={
+                        language === "pt"
+                          ? "Escreva sua mensagem aqui..."
+                          : "Write your message here..."
+                      }
                       value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="bg-[#1a1a24] border-white/10 text-white placeholder:text-muted-foreground/50 focus:border-purple-500/50 focus:ring-purple-500/20 rounded-xl min-h-[160px] resize-none"
+                      onChange={(e) =>
+                        setFormData({ ...formData, message: e.target.value })
+                      }
+                      className="bg-[#1a1a24] border-white/10 text-white placeholder:text-muted-foreground/50 focus:border-purple-500/50 focus:ring-purple-500/20 rounded-xl min-h-40 resize-none"
                       required
                     />
                   </div>
@@ -189,11 +232,15 @@ export default function ContactPage() {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="relative overflow-hidden bg-gradient-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white rounded-full px-8 py-6 border-0 disabled:opacity-50 group"
+                      className="relative overflow-hidden bg-linear-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white rounded-full px-8 py-6 border-0 disabled:opacity-50 group"
                     >
                       <span className="relative z-10 flex items-center gap-2">
                         <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                        {isSubmitting ? (language === "pt" ? "Enviando..." : "Sending...") : t.contact.send}
+                        {isSubmitting
+                          ? language === "pt"
+                            ? "Enviando..."
+                            : "Sending..."
+                          : t.contact.send}
                       </span>
                     </Button>
                   </div>
@@ -204,5 +251,5 @@ export default function ContactPage() {
         </div>
       </section>
     </main>
-  )
+  );
 }

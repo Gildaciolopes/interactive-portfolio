@@ -1,29 +1,29 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
-import { MapPin } from "lucide-react"
+import { useEffect, useRef, useState } from "react";
+import { MapPin } from "lucide-react";
 
 export function AnimatedMap() {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [isHovered, setIsHovered] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setIsVisible(true)
+          setIsVisible(true);
         }
       },
-      { threshold: 0.3 },
-    )
+      { threshold: 0.3 }
+    );
 
     if (containerRef.current) {
-      observer.observe(containerRef.current)
+      observer.observe(containerRef.current);
     }
 
-    return () => observer.disconnect()
-  }, [])
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div
@@ -40,7 +40,9 @@ export function AnimatedMap() {
       >
         {/* Grayscale Map Image */}
         <div
-          className={`absolute inset-0 transition-all duration-500 ${isHovered ? "scale-105" : "scale-100"}`}
+          className={`absolute inset-0 transition-all duration-500 ${
+            isHovered ? "scale-105" : "scale-100"
+          }`}
           style={{
             backgroundImage: `url("/images/image.png")`,
             backgroundSize: "cover",
@@ -50,17 +52,19 @@ export function AnimatedMap() {
 
         {/* Animated Overlay Effect */}
         <div
-          className={`absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent transition-opacity duration-500 ${
+          className={`absolute inset-0 bg-linear-to-t from-[#0a0a0f] via-transparent to-transparent transition-opacity duration-500 ${
             isHovered ? "opacity-60" : "opacity-80"
           }`}
         />
 
         {/* Scan Line Animation */}
         <div
-          className={`absolute inset-0 overflow-hidden pointer-events-none ${isVisible ? "opacity-100" : "opacity-0"}`}
+          className={`absolute inset-0 overflow-hidden pointer-events-none ${
+            isVisible ? "opacity-100" : "opacity-0"
+          }`}
         >
           <div
-            className="absolute w-full h-1 bg-gradient-to-r from-transparent via-purple-500/50 to-transparent animate-scan-line"
+            className="absolute w-full h-1 bg-linear-to-r from-transparent via-purple-500/50 to-transparent animate-scan-line"
             style={{
               animation: "scanLine 3s linear infinite",
             }}
@@ -88,10 +92,16 @@ export function AnimatedMap() {
             <div className="absolute inset-0 -m-4">
               <div className="w-12 h-12 rounded-full bg-purple-500/20 animate-ping" />
             </div>
-            <div className="absolute inset-0 -m-6 animate-pulse" style={{ animationDelay: "0.5s" }}>
+            <div
+              className="absolute inset-0 -m-6 animate-pulse"
+              style={{ animationDelay: "0.5s" }}
+            >
               <div className="w-16 h-16 rounded-full border border-purple-500/30" />
             </div>
-            <div className="absolute inset-0 -m-8 animate-pulse" style={{ animationDelay: "1s" }}>
+            <div
+              className="absolute inset-0 -m-8 animate-pulse"
+              style={{ animationDelay: "1s" }}
+            >
               <div className="w-20 h-20 rounded-full border border-purple-500/20" />
             </div>
 
@@ -120,7 +130,9 @@ export function AnimatedMap() {
           </div>
           <div>
             <p className="text-white font-semibold">Teresina</p>
-            <p className="text-sm text-muted-foreground">Teresina - PI, Brasil</p>
+            <p className="text-sm text-muted-foreground">
+              Teresina - PI, Brasil
+            </p>
           </div>
         </div>
       </div>
@@ -132,8 +144,8 @@ export function AnimatedMap() {
         }`}
         style={{ transitionDelay: "500ms" }}
       >
-        <span className="text-purple-400">LAT:</span> -5.0892 <span className="text-purple-400 ml-2">LONG:</span>{" "}
-        -42.8019
+        <span className="text-purple-400">LAT:</span> -5.0892{" "}
+        <span className="text-purple-400 ml-2">LONG:</span> -42.8019
       </div>
 
       {/* Hover Effect Glow */}
@@ -142,7 +154,8 @@ export function AnimatedMap() {
           isHovered ? "opacity-100" : "opacity-0"
         }`}
         style={{
-          background: "radial-gradient(circle at center, rgba(139, 92, 246, 0.1) 0%, transparent 70%)",
+          background:
+            "radial-gradient(circle at center, rgba(139, 92, 246, 0.1) 0%, transparent 70%)",
         }}
       />
 
@@ -158,5 +171,5 @@ export function AnimatedMap() {
         }
       `}</style>
     </div>
-  )
+  );
 }
