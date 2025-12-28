@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Home, User, Briefcase, FileText, Mail } from "lucide-react";
 import { useLanguage } from "@/contexts/language-context";
@@ -41,9 +42,18 @@ export function DynamicIsland() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 md:px-8 py-4">
-      <div className="text-sm text-muted-foreground font-mono">
-        America/Brazil
-      </div>
+      <Link
+        href="/"
+        className="flex items-center hover:opacity-80 transition-opacity"
+      >
+        <Image
+          src="/logo.png"
+          alt="Logo"
+          width={40}
+          height={40}
+          className="rounded-full"
+        />
+      </Link>
 
       <nav className="bg-[#1a1a24]/80 backdrop-blur-xl rounded-full px-2 py-2 border border-white/10 shadow-lg">
         <ul className="flex items-center gap-1">
