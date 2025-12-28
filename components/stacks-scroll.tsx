@@ -36,7 +36,7 @@ export function StacksScroll() {
 
     const scroll = () => {
       if (!isPaused && scrollContainer) {
-        scrollPositionRef.current += 1;
+        scrollPositionRef.current += 0.5;
         if (scrollPositionRef.current >= scrollContainer.scrollWidth / 2) {
           scrollPositionRef.current = 0;
         }

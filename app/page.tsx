@@ -142,7 +142,7 @@ export default function HomePage() {
 
       {/* GitHub & Community Section */}
       <ScrollReveal>
-        <section className="px-4 md:px-8 lg:px-16 py-16">
+        <section className="px-4 md:px-8 lg:px-16">
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
             <GitHubActivity />
             <DevCommunity />
