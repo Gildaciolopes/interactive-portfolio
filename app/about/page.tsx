@@ -21,7 +21,7 @@ const experiencesData = {
   en: [
     {
       company: "Medsafe Brasil",
-      role: "Full Stack Developer",
+      role: "Mid-Level Full Stack Developer",
       period: "Oct 2025 - Present",
       achievements: [
         "Created SQL policies to enable new features",
@@ -39,7 +39,7 @@ const experiencesData = {
       achievements: [
         "Created and maintained attractive Landing Page, optimized for SEO and performance",
         "Developed custom E-commerce platform with order flow integrated with WhatsApp",
-        "Implemented server-side rendering architecture (Next.js) and RESTful APIs (Node.js)",
+        "Implemented server-side rendering architecture (Next.js) and RESTful APIs",
         "Modeled relational database in PostgreSQL and configured production environment",
         "Applied TailwindCSS for modern, scalable and responsive interfaces",
       ],
@@ -70,7 +70,7 @@ const experiencesData = {
   pt: [
     {
       company: "Medsafe Brasil",
-      role: "Desenvolvedor Full Stack",
+      role: "Desenvolvedor Full Stack Pleno",
       period: "Out 2025 - Presente",
       achievements: [
         "Criei políticas em SQL para habilitar novas features",
@@ -88,7 +88,7 @@ const experiencesData = {
       achievements: [
         "Criação e manutenção de Landing Page atrativa, otimizada para SEO e performance",
         "Desenvolvimento de plataforma de E-commerce customizada, com fluxo de pedido integrado ao WhatsApp",
-        "Implementação de arquitetura server-side rendering (Next.js) e APIs RESTful (Node.js)",
+        "Implementação de arquitetura server-side rendering (Next.js) e APIs RESTful",
         "Modelagem de banco de dados relacional em PostgreSQL e configuração de ambiente de produção",
         "Aplicação de TailwindCSS para interfaces modernas, escaláveis e responsivas",
       ],
@@ -146,11 +146,10 @@ const educationData = {
 };
 
 const certifications = [
-  "HTTP e Performance",
-  "Fundamentos do Next.js",
-  "Formação em Lógica de Programação",
-  "Full Stack Week",
   "Aprofundando em Hooks",
+  "Aprofundando em Next.js",
+  "Bootcamp Imersão AWS",
+  "Formação JavaScript Developer",
   "Back-end Oracle (Java & Spring Boot)",
 ];
 
