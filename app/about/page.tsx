@@ -14,6 +14,7 @@ import {
   Award,
   GraduationCap,
   Briefcase,
+  ExternalLink,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -23,6 +24,12 @@ const experiencesData = {
       company: "Medsafe Brasil",
       role: "Mid-Level Full Stack Developer",
       period: "Oct 2025 - Present",
+      images: [
+        {
+          src: "/images/medsafe-about.png",
+          link: "https://medsafebrasil.com.br",
+        },
+      ],
       achievements: [
         "Created SQL policies to enable new features",
         "Implemented secure authentication integrated with Google OAuth",
@@ -36,6 +43,7 @@ const experiencesData = {
       company: "The Grife",
       role: "Full Stack Developer",
       period: "Apr 2025 - Oct 2025",
+      images: [],
       achievements: [
         "Created and maintained attractive Landing Page, optimized for SEO and performance",
         "Developed custom E-commerce platform with order flow integrated with WhatsApp",
@@ -48,6 +56,7 @@ const experiencesData = {
       company: "Freelancer",
       role: "Full Stack Developer",
       period: "Jan 2025 - Present",
+      images: [],
       achievements: [
         "Created custom web solutions for 10+ clients, including SaaS systems, Landing Pages and responsive E-commerces",
         "Delivered projects with 100% on-time approval, using technologies like TypeScript, Node.js, React.js and Next.js",
@@ -59,6 +68,7 @@ const experiencesData = {
       company: "LABIRAS - IFPI",
       role: "Full Stack Developer",
       period: "Mar 2023 - Apr 2024",
+      images: [],
       achievements: [
         "Developed and maintained responsive web applications with React.js, Next.js and Node.js, reducing average page load time by 30%",
         "Implemented REST API integration and JWT authentication",
@@ -72,6 +82,12 @@ const experiencesData = {
       company: "Medsafe Brasil",
       role: "Desenvolvedor Full Stack Pleno",
       period: "Out 2025 - Presente",
+      images: [
+        {
+          src: "/images/medsafe-about.png",
+          link: "https://medsafebrasil.com.br",
+        },
+      ],
       achievements: [
         "Criei políticas em SQL para habilitar novas features",
         "Implementei autenticação segura integrada ao Google OAuth",
@@ -85,6 +101,7 @@ const experiencesData = {
       company: "The Grife",
       role: "Desenvolvedor Full Stack",
       period: "Abr 2025 - Out 2025",
+      images: [],
       achievements: [
         "Criação e manutenção de Landing Page atrativa, otimizada para SEO e performance",
         "Desenvolvimento de plataforma de E-commerce customizada, com fluxo de pedido integrado ao WhatsApp",
@@ -97,6 +114,7 @@ const experiencesData = {
       company: "Freelancer",
       role: "Desenvolvedor Full Stack",
       period: "Jan 2025 - Presente",
+      images: [],
       achievements: [
         "Criei soluções web personalizadas para mais de 10 clientes, incluindo sistemas SaaS, Landing Pages e Ecommerces responsivos",
         "Entreguei projetos com 100% de aprovação no prazo, utilizando tecnologias como TypeScript, Node.js, React.js e Next.js",
@@ -108,6 +126,7 @@ const experiencesData = {
       company: "LABIRAS - IFPI",
       role: "Desenvolvedor Full Stack",
       period: "Mar 2023 - Abr 2024",
+      images: [],
       achievements: [
         "Desenvolvi e mantive aplicações web responsivas com React.js, Next.js e Node.js, reduzindo em 30% o tempo médio de carregamento das páginas",
         "Implementei integração com APIs REST e autenticação JWT",
@@ -367,6 +386,35 @@ export default function AboutPage() {
                         </li>
                       ))}
                     </ul>
+
+                    {experiences[0].images &&
+                      experiences[0].images.length > 0 && (
+                        <div className="flex flex-wrap gap-3">
+                          {experiences[0].images.map((img, i) => (
+                            <a
+                              key={i}
+                              href={img.link || "#"}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="group block shrink-0"
+                            >
+                              <div className="relative w-full sm:w-64 rounded-xl overflow-hidden border border-white/10 hover:border-purple-500/50 transition-all bg-white/5 backdrop-blur-sm">
+                                <div className="relative w-full aspect-video">
+                                  <Image
+                                    src={img.src}
+                                    alt={experiences[0].company}
+                                    fill
+                                    className="object-cover"
+                                  />
+                                </div>
+                                <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm rounded-full p-2 group-hover:bg-purple-500/80 transition-colors">
+                                  <ExternalLink className="w-4 h-4 text-white" />
+                                </div>
+                              </div>
+                            </a>
+                          ))}
+                        </div>
+                      )}
                   </div>
                 </div>
               </ScrollReveal>
@@ -418,6 +466,34 @@ export default function AboutPage() {
                               </li>
                             ))}
                           </ul>
+
+                          {exp.images && exp.images.length > 0 && (
+                            <div className="flex flex-wrap gap-3">
+                              {exp.images.map((img, i) => (
+                                <a
+                                  key={i}
+                                  href={img.link || "#"}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="group block shrink-0"
+                                >
+                                  <div className="relative w-full sm:w-64 rounded-xl overflow-hidden border border-white/10 hover:border-cyan-500/50 transition-all bg-white/5 backdrop-blur-sm">
+                                    <div className="relative w-full aspect-video">
+                                      <Image
+                                        src={img.src}
+                                        alt={exp.company}
+                                        fill
+                                        className="object-cover"
+                                      />
+                                    </div>
+                                    <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm rounded-full p-2 group-hover:bg-cyan-500/80 transition-colors">
+                                      <ExternalLink className="w-4 h-4 text-white" />
+                                    </div>
+                                  </div>
+                                </a>
+                              ))}
+                            </div>
+                          )}
                         </div>
                       </div>
                     ))}
