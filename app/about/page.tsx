@@ -307,7 +307,7 @@ export default function AboutPage() {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="border-white/20 text-white hover:bg-white/10 rounded-full bg-transparent"
+                      className="border-white/20 text-white hover:bg-white/10 rounded-full bg-transparent hover:text-purple-400"
                       asChild
                     >
                       <a
@@ -322,7 +322,7 @@ export default function AboutPage() {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="border-white/20 text-white hover:bg-white/10 rounded-full bg-transparent"
+                      className="border-white/20 text-white hover:bg-white/10 rounded-full bg-transparent hover:text-purple-400"
                       asChild
                     >
                       <a
@@ -337,7 +337,7 @@ export default function AboutPage() {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="border-white/20 text-white hover:bg-white/10 rounded-full bg-transparent"
+                      className="border-white/20 text-white hover:bg-white/10 rounded-full bg-transparent hover:text-purple-400"
                       asChild
                     >
                       <a href="mailto:contato.gildaciolopes@gmail.com">
