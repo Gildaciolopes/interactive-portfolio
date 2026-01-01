@@ -17,6 +17,8 @@ import {
   ExternalLink,
 } from "lucide-react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { PopupModal } from "react-calendly";
 
 const experiencesData = {
   en: [
@@ -196,6 +198,14 @@ export default function AboutPage() {
   const experiences = experiencesData[language];
   const education = educationData[language];
   const links = sidebarLinks[language];
+  const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
+  const [rootElement, setRootElement] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setRootElement(document.getElementById("__next"));
+    }
+  }, []);
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
@@ -283,15 +293,22 @@ export default function AboutPage() {
                 <div id="introduction" className="space-y-6 scroll-mt-24">
                   <Button
                     variant="outline"
-                    className="border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10 rounded-full bg-transparent"
-                    asChild
+                    className="border-cyan-500/30 text-cyan-400 hover:text-cyan-500 hover:scale-105 cursor-pointer rounded-full bg-transparent transition-all"
+                    onClick={() => setIsCalendlyOpen(true)}
                   >
-                    <a href="mailto:contato.gildaciolopes@gmail.com">
-                      <Calendar className="w-4 h-4 mr-2" />
-                      {t.about.scheduleCall}
-                      <ChevronRight className="w-4 h-4 ml-2" />
-                    </a>
+                    <Calendar className="w-4 h-4 mr-2" />
+                    {t.about.scheduleCall}
+                    <ChevronRight className="w-4 h-4 ml-2" />
                   </Button>
+
+                  {rootElement ? (
+                    <PopupModal
+                      url="https://calendly.com/gildaciolopes/30min" // TODO: Substituir pelo meu link do Calendly
+                      onModalClose={() => setIsCalendlyOpen(false)}
+                      open={isCalendlyOpen}
+                      rootElement={rootElement}
+                    />
+                  ) : null}
 
                   <div>
                     <h1 className="text-5xl font-bold text-white mb-2">
