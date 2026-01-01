@@ -251,7 +251,7 @@ export default function AboutPage() {
                     className={`rounded-full ${
                       language === "en"
                         ? "bg-white/10 text-white"
-                        : "border-white/20 text-muted-foreground hover:text-white"
+                        : "border-white/20 text-muted-foreground hover:text-white cursor-pointer"
                     }`}
                   >
                     English
@@ -263,7 +263,7 @@ export default function AboutPage() {
                     className={`rounded-full ${
                       language === "pt"
                         ? "bg-white/10 text-white"
-                        : "border-white/20 text-muted-foreground hover:text-white"
+                        : "border-white/20 text-muted-foreground hover:text-white cursor-pointer"
                     }`}
                   >
                     Português
@@ -277,7 +277,7 @@ export default function AboutPage() {
                   <button
                     key={link.href}
                     onClick={() => scrollToSection(link.href)}
-                    className="flex items-center gap-2 text-muted-foreground hover:text-white transition-colors py-2 w-full text-left"
+                    className="flex items-center gap-2 text-muted-foreground hover:text-white transition-colors py-2 w-full text-left cursor-pointer"
                   >
                     <span className="w-4 h-px bg-muted-foreground" />
                     {link.label}
