@@ -69,9 +69,9 @@ const translations: Record<Language, Translations> = {
       contact: "Contact",
     },
     hero: {
-      titleMain: "Developing",
-      titleSmall: "the",
-      titleHighlight: "future",
+      titleMain: "Gildácio",
+      titleSmall: "",
+      titleHighlight: "Lopes",
       greeting: "I'm",
       role: "Mid-Level Full Stack Developer at",
       experience:
@@ -124,9 +124,9 @@ const translations: Record<Language, Translations> = {
       contact: "Contato",
     },
     hero: {
-      titleMain: "Desenvolvendo",
-      titleSmall: "o",
-      titleHighlight: "futuro",
+      titleMain: "Gildácio",
+      titleSmall: "",
+      titleHighlight: "Lopes",
       greeting: "Eu sou",
       role: "Desenvolvedor Full Stack Pleno na",
       experience:

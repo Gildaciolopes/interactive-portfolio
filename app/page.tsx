@@ -31,7 +31,6 @@ export default function HomePage() {
                 <span className="text-muted-foreground">
                   {t.hero.titleSmall}
                 </span>
-                <br />
                 <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 to-purple-500">
                   {t.hero.titleHighlight}
                 </span>

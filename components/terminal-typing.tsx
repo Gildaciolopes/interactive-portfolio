@@ -11,7 +11,7 @@ interface TerminalLine {
 const codeLines: TerminalLine[] = [
   {
     type: "comment",
-    content: "// Gildácio Lopes - Full Stack Developer Profile",
+    content: "// Full-Stack Developer Profile",
     delay: 50,
   },
   { type: "keyword", content: "", delay: 100 },
@@ -32,7 +32,7 @@ const codeLines: TerminalLine[] = [
   },
   {
     type: "property",
-    content: '  backend: ["Node.js", "Express", "NestJS"],',
+    content: '  backend: ["Node.js", "Express", "NestJS e Go"],',
     delay: 40,
   },
   {
