@@ -7,11 +7,11 @@ import Image from "next/image";
 export const projects = [
   {
     title: {
-      pt: "SaaS de Agendamento para Clínicas",
+      pt: "SaaS de Agendamento para Clínicas Médicas",
       en: "Clinic Scheduling SaaS",
     },
     description: {
-      pt: "Sistema completo de agendamento para clínicas médicas com dashboard administrativo e gestão de pacientes.",
+      pt: "Sistema completo de agendamentos, com dashboard administrativo e gestão de pacientes.",
       en: "Complete scheduling system for medical clinics with administrative dashboard and patient management.",
     },
     image: "/images/drSchedule.svg",
@@ -49,11 +49,11 @@ export const projects = [
   },
   {
     title: {
-      pt: "Self Checkout para Lanchonetes",
-      en: "Self Checkout for Fast Food with Stripe Payments",
+      pt: "Self Checkout para Lanchonetes e Pagamentos com Stripe",
+      en: "Self Checkout for Fast Food",
     },
     description: {
-      pt: "Sistema de autoatendimento para lanchonetes com integração de pagamentos via Stripe.",
+      pt: "Sistema com foco em diminuir filas em lanchonetes, automatizando pedidos e pagamentos.",
       en: "Self-service system for fast food restaurants with Stripe payment integration.",
     },
     image: "/images/FSW-Donalds.png",
