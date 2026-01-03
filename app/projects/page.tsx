@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useEffect, useState } from "react";
 import { DynamicIsland } from "@/components/dynamic-island";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { useLanguage } from "@/contexts/language-context";
@@ -22,8 +23,68 @@ export default function ProjectsPage() {
         : hp.description,
     image: hp.image,
     link: hp.link,
-    team: hp.team ?? 1,
+    repo: hp.repo,
+    team: (hp as any).team ?? 1,
+    key: typeof hp.title === "object" ? hp.title.en : hp.title,
   }));
+
+  const [contributorsMap, setContributorsMap] = useState<Record<string, any[]>>(
+    {}
+  );
+
+  useEffect(() => {
+    const controllers: AbortController[] = [];
+
+    homeProjects.forEach((hp) => {
+      const key = typeof hp.title === "object" ? hp.title.en : hp.title;
+      const repoCandidate = hp.repo || hp.link;
+
+      const parseRepo = (input?: string) => {
+        if (!input) return null;
+        try {
+          const match = input.match(
+            /github\.com\/([^\/]+)\/([^\/]+)(?:\.git)?/i
+          );
+          if (match) return `${match[1]}/${match[2].replace(/\.git$/i, "")}`;
+          if (input.split("/").length === 2) return input;
+        } catch (e) {
+          return null;
+        }
+        return null;
+      };
+
+      const repo = parseRepo(repoCandidate);
+      if (!repo) return;
+
+      const controller = new AbortController();
+      controllers.push(controller);
+
+      fetch(`https://api.github.com/repos/${repo}/contributors?per_page=6`, {
+        signal: controller.signal,
+      })
+        .then((res) => {
+          if (!res.ok) throw new Error("Failed to fetch contributors");
+          return res.json();
+        })
+        .then((data) => {
+          if (!Array.isArray(data)) return;
+          const filtered = data.filter((d: any) => {
+            const login = (d.login || "").toLowerCase();
+            if (login.includes("vercel")) return false;
+            if (login.includes("copilot")) return false;
+            if ((d.type || "").toLowerCase() === "bot") return false;
+            return true;
+          });
+          setContributorsMap((prev) => ({
+            ...prev,
+            [key]: filtered.slice(0, 6),
+          }));
+        })
+        .catch(() => {});
+    });
+
+    return () => controllers.forEach((c) => c.abort());
+  }, []);
 
   return (
     <main className="min-h-screen">
@@ -61,14 +122,31 @@ export default function ProjectsPage() {
 
                     <div className="flex items-center gap-2 mb-4">
                       <div className="flex -space-x-2">
-                        {Array.from({ length: Math.min(project.team, 4) }).map(
-                          (_, i) => (
-                            <div
-                              key={i}
-                              className="w-7 h-7 rounded-full bg-linear-to-br from-purple-500 to-cyan-500 border-2 border-[#12121a]"
-                            />
-                          )
-                        )}
+                        {contributorsMap[project.key]
+                          ? contributorsMap[project.key].map((contributor) => (
+                              <a
+                                key={contributor.id || contributor.login}
+                                href={contributor.html_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-7 h-7 rounded-full overflow-hidden ring-2 ring-[#0f1724] border border-white/10"
+                                title={contributor.login}
+                              >
+                                <img
+                                  src={contributor.avatar_url}
+                                  alt={contributor.login}
+                                  className="w-full h-full object-cover"
+                                />
+                              </a>
+                            ))
+                          : Array.from({
+                              length: Math.min(project.team, 4),
+                            }).map((_, i) => (
+                              <div
+                                key={i}
+                                className="w-7 h-7 rounded-full bg-linear-to-br from-purple-500 to-cyan-500 border-2 border-[#12121a]"
+                              />
+                            ))}
                       </div>
                     </div>
 
@@ -77,20 +155,31 @@ export default function ProjectsPage() {
                     </p>
 
                     <div className="flex items-center gap-6">
-                      <Link
+                      {project.repo && (
+                        <a
+                          href={
+                            project.repo.startsWith("http")
+                              ? project.repo
+                              : `https://github.com/${project.repo}`
+                          }
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 text-sm text-cyan-400 hover:text-cyan-300 transition-colors"
+                        >
+                          {t.common.readCaseStudy}
+                          <ArrowRight className="w-4 h-4" />
+                        </a>
+                      )}
+
+                      <a
                         href={project.link}
-                        className="flex items-center gap-2 text-sm text-cyan-400 hover:text-cyan-300 transition-colors"
-                      >
-                        {t.common.readCaseStudy}
-                        <ArrowRight className="w-4 h-4" />
-                      </Link>
-                      <Link
-                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="flex items-center gap-2 text-sm text-muted-foreground hover:text-white transition-colors"
                       >
                         {t.common.viewProject}
                         <ExternalLink className="w-4 h-4" />
-                      </Link>
+                      </a>
                     </div>
                   </div>
                 </div>

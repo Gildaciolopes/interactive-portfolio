@@ -111,7 +111,7 @@ const translations: Record<Language, Translations> = {
     common: {
       less: "less",
       more: "more",
-      readCaseStudy: "Read case study",
+      readCaseStudy: "Github Repository",
       viewProject: "View project",
     },
   },
@@ -166,7 +166,7 @@ const translations: Record<Language, Translations> = {
     common: {
       less: "menos",
       more: "mais",
-      readCaseStudy: "Ler case study",
+      readCaseStudy: "Repositório Github",
       viewProject: "Ver projeto",
     },
   },
