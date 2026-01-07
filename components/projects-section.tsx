@@ -32,7 +32,7 @@ export const projects = [
   },
   {
     title: {
-      pt: "SaaS de Agendamento para Barbearias",
+      pt: "SaaS Completo de Agendamento para Barbearias",
       en: "Barber Shop Scheduling SaaS",
     },
     description: {
