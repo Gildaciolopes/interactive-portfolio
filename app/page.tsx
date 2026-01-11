@@ -64,10 +64,13 @@ export default function HomePage() {
               </Button>
               <Button
                 variant="ghost"
+                asChild
                 className="text-white border border-transparent rounded-full px-6 cursor-pointer transition-colors hover:text-white hover:bg-transparent! hover:border hover:border-white/70"
               >
-                <Download className="w-4 h-4 mr-2" />
-                {t.hero.cta.cv}
+                <a href="/GildacioLopes_FullStack.pdf" download>
+                  <Download className="w-4 h-4 mr-2" />
+                  {t.hero.cta.cv}
+                </a>
               </Button>
               <Button
                 variant="ghost"
