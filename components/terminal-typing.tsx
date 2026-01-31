@@ -32,7 +32,7 @@ const codeLines: TerminalLine[] = [
   },
   {
     type: "property",
-    content: '  backend: ["Node.js", "Express", "NestJS e Go"],',
+    content: '  backend: ["Node.js", "Express", "NestJS e C#"],',
     delay: 40,
   },
   {
@@ -69,7 +69,7 @@ export function TerminalTyping() {
           const newLines = [...prev];
           newLines[currentLineIndex] = lineContent.slice(
             0,
-            currentCharIndex + 1
+            currentCharIndex + 1,
           );
           return newLines;
         });
@@ -97,7 +97,7 @@ export function TerminalTyping() {
           <span key={i} className="text-white">
             {ch}
           </span>
-        )
+        ),
       );
 
     const originalLine = codeLines[index];

@@ -225,7 +225,7 @@ export default function AboutPage() {
             <aside className="space-y-8 lg:sticky lg:top-24 lg:self-start">
               {/* Profile Image */}
               <div className="flex flex-col items-center">
-                <div className="relative w-48 h-48 rounded-full overflow-hidden border-4 border-cyan-500/30 mb-4">
+                <div className="relative w-48 h-48 rounded-full overflow-hidden border-2 border-purple-500/20 mb-4">
                   <Image
                     src="/images/professional-image.png"
                     alt="Gildácio Lopes"
@@ -592,7 +592,7 @@ export default function AboutPage() {
                           : "Languages & Technologies"}
                       </h4>
                       <div className="flex flex-wrap gap-2">
-                        {["JavaScript", "TypeScript", "Go"].map((tech) => (
+                        {["JavaScript", "TypeScript", "C#"].map((tech) => (
                           <code
                             key={tech}
                             className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-muted-foreground hover:border-purple-500/50 hover:text-purple-300 transition-colors"
@@ -608,13 +608,12 @@ export default function AboutPage() {
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {[
+                          "Next.js",
                           "React",
                           "React Native",
                           "Node.js",
                           "Express",
-                          "Next.js",
-                          "TailwindCSS",
-                          "Shadcn",
+                          "Nest.js",
                         ].map((tech) => (
                           <code
                             key={tech}
@@ -640,7 +639,7 @@ export default function AboutPage() {
                             >
                               {tech}
                             </code>
-                          )
+                          ),
                         )}
                       </div>
                     </div>
@@ -659,7 +658,7 @@ export default function AboutPage() {
                             >
                               {tech}
                             </code>
-                          )
+                          ),
                         )}
                       </div>
                     </div>

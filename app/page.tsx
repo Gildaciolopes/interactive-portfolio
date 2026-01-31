@@ -138,11 +138,20 @@ export default function HomePage() {
                   className="object-contain"
                 />
               </div>
+              <div className="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center">
+                <Image
+                  src="/images/docker.svg"
+                  alt="Docker"
+                  width={20}
+                  height={20}
+                  className="object-contain"
+                />
+              </div>
             </div>
           </div>
 
           {/* Right Content - Terminal */}
-          <div className="flex justify-center lg:justify-end">
+          <div className="flex justify-center lg:justify-end mb-5 md:xl-0">
             <TerminalTyping />
           </div>
         </div>

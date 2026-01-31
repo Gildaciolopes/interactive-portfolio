@@ -32,7 +32,7 @@ export function DynamicIsland() {
           minute: "2-digit",
           second: "2-digit",
           timeZone: "America/Sao_Paulo",
-        })
+        }),
       );
     };
     updateTime();
@@ -51,11 +51,11 @@ export function DynamicIsland() {
           alt="Logo"
           width={40}
           height={40}
-          className="border-3 border-black rounded-full"
+          className="border-3 border-black rounded-full hidden md:block"
         />
       </Link>
 
-      <nav className="bg-[#1a1a24]/80 backdrop-blur-xl rounded-full px-2 py-2 border border-white/10 shadow-lg">
+      <nav className="bg-[#1a1a24]/80 mx-auto backdrop-blur-xl rounded-full px-2 py-2 border border-white/10 shadow-lg">
         <ul className="flex items-center gap-1">
           {navItems.map((item) => {
             const isActive = pathname === item.href;
@@ -68,7 +68,7 @@ export function DynamicIsland() {
                     "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300",
                     isActive
                       ? "bg-white/10 text-white"
-                      : "text-muted-foreground hover:text-white hover:bg-white/5"
+                      : "text-muted-foreground hover:text-white hover:bg-white/5",
                   )}
                 >
                   <Icon className="w-4 h-4" />
@@ -82,7 +82,7 @@ export function DynamicIsland() {
         </ul>
       </nav>
 
-      <div className="text-sm text-muted-foreground font-mono">
+      <div className="text-sm text-muted-foreground font-mono hidden md:block">
         {mounted ? time : "00:00:00"}
       </div>
     </header>
