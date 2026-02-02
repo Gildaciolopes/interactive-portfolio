@@ -265,10 +265,10 @@ export default function ContactPage() {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="relative overflow-hidden bg-linear-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white rounded-full px-8 py-6 border-0 disabled:opacity-50 group"
+                      className="relative overflow-hidden bg-linear-to-r from-purple-600 to-purple-500 hover:from-purple-500 hover:to-purple-400 text-white rounded-full px-6 py-6 border-0 disabled:opacity-50 group cursor-pointer"
                     >
                       <span className="relative z-10 flex items-center gap-2">
-                        <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        <Send className="w-6 h-6 group-hover:scale-120 duration-300" />
                         {isSubmitting
                           ? language === "pt"
                             ? "Enviando..."
