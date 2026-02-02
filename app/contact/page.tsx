@@ -18,6 +18,7 @@ import {
   MessageCircle,
 } from "lucide-react";
 import { useState } from "react";
+import { toast } from "@/hooks/use-toast";
 
 export default function ContactPage() {
   const { language, t } = useLanguage();
@@ -44,18 +45,26 @@ export default function ContactPage() {
       }
 
       setFormData({ name: "", email: "", message: "" });
-      alert(
-        language === "pt"
-          ? "Mensagem enviada com sucesso!"
-          : "Message sent successfully!",
-      );
+      toast({
+        title: language === "pt" ? "Mensagem enviada" : "Message sent",
+        description:
+          language === "pt"
+            ? "Sua mensagem foi enviada com sucesso. Obrigado!"
+            : "Your message was sent successfully. Thank you!",
+      });
     } catch (err) {
       console.error(err);
-      alert(
-        language === "pt"
-          ? "Ocorreu um erro ao enviar a mensagem."
-          : "An error occurred while sending the message.",
-      );
+      toast({
+        title:
+          language === "pt"
+            ? "Erro ao enviar mensagem"
+            : "Error sending message",
+        description:
+          language === "pt"
+            ? "Ocorreu um erro ao enviar sua mensagem. Tente novamente mais tarde."
+            : "There was an error sending your message. Please try again later.",
+        variant: "destructive",
+      });
     } finally {
       setIsSubmitting(false);
     }

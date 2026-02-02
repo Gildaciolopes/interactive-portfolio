@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { LanguageProvider } from "@/contexts/language-context";
 import { CursorGlow } from "@/components/cursor-glow";
+import { Toaster } from "@/components/ui/toaster";
 
 import {
   JetBrains_Mono,
@@ -69,6 +70,7 @@ export default function RootLayout({
         <LanguageProvider>
           <CursorGlow />
           {children}
+          <Toaster />
         </LanguageProvider>
         <Analytics />
       </body>
