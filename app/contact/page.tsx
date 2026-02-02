@@ -32,10 +32,7 @@ export default function ContactPage() {
     e.preventDefault();
     setIsSubmitting(true);
     try {
-      const webhookUrl =
-        process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL ||
-        "http://localhost:5678/webhook/contact-workflow";
-      const res = await fetch(webhookUrl, {
+      const res = await fetch("/api/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
