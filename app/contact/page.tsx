@@ -31,10 +31,37 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    console.log(formData);
-    setIsSubmitting(false);
-    setFormData({ name: "", email: "", message: "" });
+    try {
+      const webhookUrl =
+        process.env.NEXT_PUBLIC_N8N_WEBHOOK_URL ||
+        "http://localhost:5678/webhook/contact-workflow";
+      const res = await fetch(webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        const err = await res.text();
+        throw new Error(err || "Failed to send message");
+      }
+
+      setFormData({ name: "", email: "", message: "" });
+      alert(
+        language === "pt"
+          ? "Mensagem enviada com sucesso!"
+          : "Message sent successfully!",
+      );
+    } catch (err) {
+      console.error(err);
+      alert(
+        language === "pt"
+          ? "Ocorreu um erro ao enviar a mensagem."
+          : "An error occurred while sending the message.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

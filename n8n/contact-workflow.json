@@ -1,0 +1,43 @@
+{
+  "name": "Contact Form → SMTP",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "contact-workflow",
+        "responseMode": "onReceived",
+        "responseData": "respond"
+      },
+      "name": "Contact Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "fromEmail": "={{$json[\"email\"]}}",
+        "toEmail": "contato.gildaciolopes@gmail.com",
+        "subject": "Contato Portfolio - {{$json[\"name\"]}}",
+        "text": "={{$json[\"message\"]}}",
+        "html": "=<div><p>{{$json[\"message\"]}}</p><p>From: {{$json[\"name\"]}} &lt;{{$json[\"email\"]}}&gt;</p></div>"
+      },
+      "name": "Send Email",
+      "type": "n8n-nodes-base.smtp",
+      "typeVersion": 1,
+      "position": [550, 300]
+    }
+  ],
+  "connections": {
+    "Contact Webhook": {
+      "main": [
+        [
+          {
+            "node": "Send Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
