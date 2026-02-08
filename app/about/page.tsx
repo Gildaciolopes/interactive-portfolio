@@ -293,17 +293,23 @@ export default function AboutPage() {
                 <div id="introduction" className="space-y-6 scroll-mt-24">
                   <Button
                     variant="outline"
+                    asChild
                     className="border-cyan-500/30 text-cyan-400 hover:text-cyan-500 hover:scale-105 cursor-pointer rounded-full bg-transparent transition-all"
-                    onClick={() => setIsCalendlyOpen(true)}
                   >
-                    <Calendar className="w-4 h-4 mr-2" />
-                    {t.about.scheduleCall}
-                    <ChevronRight className="w-4 h-4 ml-2" />
+                    <a
+                      href="https://cal.com/gildacio"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Calendar className="w-4 h-4 mr-2" />
+                      {t.about.scheduleCall}
+                      <ChevronRight className="w-4 h-4 ml-2" />
+                    </a>
                   </Button>
 
                   {rootElement ? (
                     <PopupModal
-                      url="https://calendly.com/gildaciolopes/30min" // TODO: Substituir pelo meu link do Calendly
+                      url="https://cal.com/gildacio" // TODO: Substituir pelo meu link do Calendly
                       onModalClose={() => setIsCalendlyOpen(false)}
                       open={isCalendlyOpen}
                       rootElement={rootElement}
