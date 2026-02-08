@@ -32,12 +32,12 @@ const codeLines: TerminalLine[] = [
   },
   {
     type: "property",
-    content: '  backend: ["Node.js", "Express", "NestJS e C#"],',
+    content: '  backend: ["Node.js", "Express", "NestJS", "C#"],',
     delay: 40,
   },
   {
     type: "property",
-    content: '  database: ["MongoDB", "PostgreSQL"],',
+    content: '  database: ["PostgreSQL", "MongoDB"],',
     delay: 40,
   },
   {
@@ -186,46 +186,50 @@ export function TerminalTyping() {
   }
 
   return (
-    <div className="bg-[#1e1e2e] rounded-xl overflow-hidden border border-white/10 shadow-2xl w-full max-w-xl">
+    <div className="bg-[#1e1e2e] rounded-xl overflow-hidden border border-white/10 shadow-2xl w-full max-w-2xl">
       {/* Terminal Header */}
-      <div className="flex items-center justify-between px-4 py-3 bg-[#2d2d3d] border-b border-white/5">
+      <div className="flex items-center justify-between px-6 py-4 bg-[#2d2d3d] border-b border-white/5">
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 rounded-full bg-red-500" />
           <div className="w-3 h-3 rounded-full bg-yellow-500" />
           <div className="w-3 h-3 rounded-full bg-green-500" />
         </div>
-        <span className="text-sm text-muted-foreground font-mono">
+        <span className="text-base text-muted-foreground font-mono">
           developer.ts
         </span>
-        <span className="text-xs text-muted-foreground">TypeScript</span>
+        <span className="text-sm text-muted-foreground">TypeScript</span>
       </div>
 
       {/* Terminal Content */}
-      <div className="p-4 font-mono text-sm min-h-70">
-        {displayedLines.map((line, index) => (
-          <div key={index} className="flex">
-            <span className="text-muted-foreground w-8 text-right mr-4 select-none">
-              {index + 1}
-            </span>
-            <span className="flex-1 whitespace-pre">
-              {renderLine(line, index)}
-            </span>
+      <div className="p-6 font-mono text-xs md:text-sm xl:text-base min-h-80">
+        <div className="overflow-x-auto w-full">
+          <div className="min-w-max">
+            {displayedLines.map((line, index) => (
+              <div key={index} className="flex">
+                <span className="text-muted-foreground w-10 text-right mr-4 select-none">
+                  {index + 1}
+                </span>
+                <span className="flex-1 whitespace-pre">
+                  {renderLine(line, index)}
+                </span>
+              </div>
+            ))}
+            {isTyping && (
+              <div className="flex">
+                <span className="text-muted-foreground w-10 text-right mr-4 select-none">
+                  {displayedLines.length + 1}
+                </span>
+                <span className="flex-1 whitespace-pre">
+                  <span className="typing-cursor text-white">|</span>
+                </span>
+              </div>
+            )}
           </div>
-        ))}
-        {isTyping && (
-          <div className="flex">
-            <span className="text-muted-foreground w-8 text-right mr-4 select-none">
-              {displayedLines.length + 1}
-            </span>
-            <span className="flex-1 whitespace-pre">
-              <span className="typing-cursor text-white">|</span>
-            </span>
-          </div>
-        )}
+        </div>
       </div>
 
       {/* Terminal Footer */}
-      <div className="flex items-center justify-between px-4 py-2 bg-[#2d2d3d] border-t border-white/5 text-xs text-muted-foreground">
+      <div className="flex items-center justify-between px-6 py-3 bg-[#2d2d3d] border-t border-white/5 text-sm text-muted-foreground">
         <span>TypeScript</span>
         <span>UTF-8</span>
         <span>Ln {codeLines.length}, Col 2</span>

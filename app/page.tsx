@@ -24,9 +24,9 @@ export default function HomePage() {
       <section className="min-h-screen flex items-center px-4 md:px-8 lg:px-16 pt-24">
         <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight">
+          <div className="space-y-10">
+            <div className="space-y-6">
+              <h1 className="text-4xl md:text-6xl lg:text-6xl font-extrabold text-white leading-tight">
                 {t.hero.titleMain}{" "}
                 <span className="text-muted-foreground">
                   {t.hero.titleSmall}
@@ -37,7 +37,7 @@ export default function HomePage() {
                 <span className="text-cyan-400">.</span>
               </h1>
 
-              <p className="text-lg text-muted-foreground max-w-lg">
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
                 {t.hero.role}{" "}
                 <a
                   href="https://medsafebrasil.com.br"
@@ -49,41 +49,43 @@ export default function HomePage() {
                   </code>
                 </a>
               </p>
-              <p className="text-muted-foreground">{t.hero.experience}</p>
+              <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
+                {t.hero.experience}
+              </p>
             </div>
 
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-6 items-center">
               <Button
                 asChild
-                className="bg-white text-black hover:bg-white/90 rounded-full px-6"
+                className="bg-white text-black hover:bg-white/90 rounded-full px-6 py-3 text-md"
               >
                 <Link href="/projects">
-                  <ExternalLink className="w-4 h-4 mr-2" />
+                  <ExternalLink className="w-5 h-5" />
                   {t.hero.cta.projects}
                 </Link>
               </Button>
               <Button
                 variant="ghost"
                 asChild
-                className="text-white border border-transparent rounded-full px-6 cursor-pointer transition-colors hover:text-white hover:bg-transparent! hover:border hover:border-white/70"
+                className="text-white border border-transparent rounded-full px-6 py-3 cursor-pointer transition-colors hover:text-white hover:bg-transparent! hover:border hover:border-white/70 text-md"
               >
                 <a href="/GildacioLopes_FullStack.pdf" download>
-                  <Download className="w-4 h-4 mr-2" />
+                  <Download className="w-5 h-5 " />
                   {t.hero.cta.cv}
                 </a>
               </Button>
               <Button
                 variant="ghost"
                 asChild
-                className="text-white border border-transparent rounded-full px-6 cursor-pointer transition-colors hover:text-white hover:bg-transparent! hover:border hover:border-white/70"
+                className="text-white border border-transparent rounded-full py-3 cursor-pointer transition-colors hover:text-white hover:bg-transparent! hover:border hover:border-white/70 text-md"
               >
                 <Link href="/about">
                   <Image
                     src="/images/professional-image.png"
                     alt="Gildácio Lopes"
-                    width={24}
-                    height={24}
-                    className="rounded-full mr-2"
+                    width={28}
+                    height={28}
+                    className="rounded-full"
                   />
                   {t.hero.cta.about}
                 </Link>
@@ -91,59 +93,59 @@ export default function HomePage() {
             </div>
 
             {/* Stack Icons */}
-            <div className="flex items-center gap-4 pt-4">
-              <div className="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center">
+            <div className="flex items-center gap-5 pt-6">
+              <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
                 <Image
                   src="/images/typescript.svg"
                   alt="TypeScript"
-                  width={20}
-                  height={20}
+                  width={24}
+                  height={24}
                   className="object-contain"
                 />
               </div>
-              <div className="w-8 h-8 rounded-lg bg-cyan-500/20 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-cyan-500/20 flex items-center justify-center">
                 <Image
                   src="/images/react.svg"
                   alt="React"
-                  width={20}
-                  height={20}
+                  width={24}
+                  height={24}
                   className="object-contain"
                 />
               </div>
-              <div className="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center">
                 <Image
                   src="/images/nextjs2.svg"
                   alt="Next.js"
-                  width={20}
-                  height={20}
+                  width={24}
+                  height={24}
                   className="object-contain"
                 />
               </div>
 
-              <div className="w-8 h-8 rounded-lg bg-green-500/20 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center">
                 <Image
                   src="/images/nodejs.svg"
                   alt="Node.js"
-                  width={20}
-                  height={20}
+                  width={24}
+                  height={24}
                   className="object-contain"
                 />
               </div>
-              <div className="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
                 <Image
                   src="/images/postgresql.svg"
                   alt="PostgreSQL"
-                  width={20}
-                  height={20}
+                  width={24}
+                  height={24}
                   className="object-contain"
                 />
               </div>
-              <div className="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center">
                 <Image
                   src="/images/docker.svg"
                   alt="Docker"
-                  width={20}
-                  height={20}
+                  width={24}
+                  height={24}
                   className="object-contain"
                 />
               </div>
