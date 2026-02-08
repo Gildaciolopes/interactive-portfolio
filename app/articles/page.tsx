@@ -44,7 +44,7 @@ export default function ArticlesPage() {
             </div>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {articles.map((article, index) => (
               <ScrollReveal key={article.title} delay={index * 100}>
                 <a
