@@ -43,7 +43,7 @@ const experiencesData = {
     },
     {
       company: "The Grife",
-      role: "Full Stack Developer",
+      role: "Junior Full Stack Developer",
       period: "Apr 2025 - Oct 2025",
       images: [],
       achievements: [
@@ -56,7 +56,7 @@ const experiencesData = {
     },
     {
       company: "Freelancer",
-      role: "Full Stack Developer",
+      role: "Freelance Full Stack Developer",
       period: "Jan 2025 - Present",
       images: [],
       achievements: [
@@ -68,7 +68,7 @@ const experiencesData = {
     },
     {
       company: "LABIRAS - IFPI",
-      role: "Full Stack Developer",
+      role: "Junior Full Stack Developer",
       period: "Mar 2023 - Apr 2024",
       images: [],
       achievements: [
@@ -101,7 +101,7 @@ const experiencesData = {
     },
     {
       company: "The Grife",
-      role: "Desenvolvedor Full Stack",
+      role: "Desenvolvedor Full Stack Júnior",
       period: "Abr 2025 - Out 2025",
       images: [],
       achievements: [
@@ -114,7 +114,7 @@ const experiencesData = {
     },
     {
       company: "Freelancer",
-      role: "Desenvolvedor Full Stack",
+      role: "Desenvolvedor Full Stack Freelancer",
       period: "Jan 2025 - Presente",
       images: [],
       achievements: [
@@ -126,7 +126,7 @@ const experiencesData = {
     },
     {
       company: "LABIRAS - IFPI",
-      role: "Desenvolvedor Full Stack",
+      role: "Desenvolvedor Full Stack Júnior",
       period: "Mar 2023 - Abr 2024",
       images: [],
       achievements: [
