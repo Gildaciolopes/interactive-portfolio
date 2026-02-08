@@ -33,12 +33,11 @@ const experiencesData = {
         },
       ],
       achievements: [
-        "Created SQL policies to enable new features",
-        "Implemented secure authentication integrated with Google OAuth",
-        "Structured and implemented reusable components in React and React Native, reducing rework and accelerating the development of new features",
-        "Designed and developed REST routes in the backend for the notifications module, ensuring secure and scalable communication",
-        "Integrated the mobile app with these APIs, implementing the complete flow of sending, receiving and displaying real-time notifications",
-        "Optimized the architecture between frontend and backend, increasing the reliability of the alert system and reducing communication failures",
+        "Developed a complete clinical scheduling management system with Web and Mobile applications",
+        "Structured and implemented reusable components in React and React Native, reducing rework and accelerating feature development",
+        "Designed and implemented REST routes in the backend (Node.js/Express) for the notifications module, ensuring secure and scalable communication",
+        "Integrated the mobile app with these APIs, implementing the full flow for sending, receiving, and displaying real-time notifications",
+        "Optimized validations, requests, and front-end processing, reducing CPU usage by over 30%",
       ],
     },
     {
@@ -91,12 +90,11 @@ const experiencesData = {
         },
       ],
       achievements: [
-        "Criei políticas em SQL para habilitar novas features",
-        "Implementei autenticação segura integrada ao Google OAuth",
+        "Desenvolvi um sistema completo de gerenciamento de Escalas Clínicas, com aplicações Web e Mobile",
         "Estruturei e implementei componentes reutilizáveis em React e React Native, reduzindo retrabalho e acelerando o desenvolvimento de novas funcionalidades",
-        "Projetei e desenvolvi rotas REST no backend para o módulo de notificações, garantindo comunicação segura e escalável",
+        "Projetei e desenvolvi rotas REST no backend (Node.js/Express) para o módulo de notificações, garantindo comunicação segura e escalável",
         "Integrei o app mobile com essas APIs, implementando o fluxo completo de envio, recebimento e exibição de notificações em tempo real",
-        "Otimizei a arquitetura entre frontend e backend, aumentando a confiabilidade do sistema de alertas e reduzindo falhas de comunicação",
+        "Otimizei validações, requisições e processamentos no front-end, reduzindo mais de 30% no uso de CPU",
       ],
     },
     {
