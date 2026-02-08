@@ -118,9 +118,9 @@ export default function ContactPage() {
                 <div className="relative w-14 h-14 rounded-xl bg-linear-to-br from-cyan-500/20 to-cyan-600/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                   <Mail className="w-6 h-6 text-cyan-400" />
                 </div>
-                <div className="relative">
+                <div className="relative min-w-0">
                   <p className="text-sm text-muted-foreground mb-1">Email</p>
-                  <p className="text-white font-semibold text-sm md:text-base truncate">
+                  <p className="text-white font-semibold text-sm md:text-base wrap-break-word whitespace-normal">
                     contato.gildaciolopes@gmail.com
                   </p>
                 </div>
