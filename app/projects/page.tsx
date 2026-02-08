@@ -15,11 +15,11 @@ export default function ProjectsPage() {
   const mergedProjects = homeProjects.map((hp) => ({
     title:
       typeof hp.title === "object"
-        ? hp.title[language] ?? hp.title.en
+        ? (hp.title[language] ?? hp.title.en)
         : hp.title,
     description:
       typeof hp.description === "object"
-        ? hp.description[language] ?? hp.description.en
+        ? (hp.description[language] ?? hp.description.en)
         : hp.description,
     image: hp.image,
     link: hp.link,
@@ -29,7 +29,7 @@ export default function ProjectsPage() {
   }));
 
   const [contributorsMap, setContributorsMap] = useState<Record<string, any[]>>(
-    {}
+    {},
   );
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export default function ProjectsPage() {
         if (!input) return null;
         try {
           const match = input.match(
-            /github\.com\/([^\/]+)\/([^\/]+)(?:\.git)?/i
+            /github\.com\/([^\/]+)\/([^\/]+)(?:\.git)?/i,
           );
           if (match) return `${match[1]}/${match[2].replace(/\.git$/i, "")}`;
           if (input.split("/").length === 2) return input;
@@ -101,7 +101,7 @@ export default function ProjectsPage() {
             </div>
           </ScrollReveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
             {mergedProjects.map((project, index) => (
               <ScrollReveal key={project.title} delay={index * 100}>
                 <div className="group bg-[#12121a] rounded-2xl overflow-hidden border border-white/5 hover:border-cyan-500/30 transition-all duration-500 h-full">
