@@ -44,7 +44,7 @@ export default function HomePage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <code className="px-2 py-1 bg-white/10 rounded text-sm text-white hover:text-purple-400 transition-colors">
+                  <code className="px-2 py-1 bg-white/10 text-base md:text-lg rounded text-white hover:text-purple-400 transition-colors">
                     Medsafe Brasil
                   </code>
                 </a>
