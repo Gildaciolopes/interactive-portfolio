@@ -37,11 +37,10 @@ export const metadata: Metadata = {
   title: "Gildácio Lopes | Software Engineer",
   description:
     "Mid-level Full-Stack Software Engineer specializing in scalable platforms and custom solutions",
-  generator: "v0.app",
   icons: {
     icon: [
       {
-        url: "/icon-light-32x32.png",
+        url: "/logo.png",
         media: "(prefers-color-scheme: light)",
       },
       {
