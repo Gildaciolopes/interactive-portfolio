@@ -305,7 +305,7 @@ export function PhoneMockupModal({
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 text-white text-sm font-medium rounded-lg hover:opacity-90 hover:text-cyan-400 transition-opacity"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 text-white text-sm font-medium rounded-lg hover:bg-white/10 hover:text-cyan-400 transition-colors"
                 >
                   {t.common.viewProject}
                   <ExternalLink className="w-4 h-4" />
@@ -321,7 +321,7 @@ export function PhoneMockupModal({
                   }
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 text-white text-sm font-medium rounded-lg hover:bg-white/10 hover:text-cyan-400 transition-colors"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/10 text-white text-sm font-medium rounded-lg hover:bg-white/10 hover:text-purple-400 transition-colors"
                 >
                   <Github className="w-4 h-4" />
                   GitHub
