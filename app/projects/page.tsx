@@ -4,13 +4,19 @@ import React, { useEffect, useState } from "react";
 import { DynamicIsland } from "@/components/dynamic-island";
 import { ScrollReveal } from "@/components/scroll-reveal";
 import { useLanguage } from "@/contexts/language-context";
-import { projects as homeProjects } from "@/components/projects-section";
+import {
+  projects as homeProjects,
+  Project,
+} from "@/components/projects-section";
+import { PhoneMockupModal } from "@/components/phone-mockup-modal";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function ProjectsPage() {
   const { t, language } = useLanguage();
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const mergedProjects = homeProjects.map((hp) => ({
     title:
@@ -104,7 +110,13 @@ export default function ProjectsPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
             {mergedProjects.map((project, index) => (
               <ScrollReveal key={project.title} delay={index * 100}>
-                <div className="group bg-[#12121a] rounded-2xl overflow-hidden border border-white/5 hover:border-cyan-500/30 transition-all duration-500 h-full">
+                <div
+                  className="group bg-[#12121a] rounded-2xl overflow-hidden border border-white/5 hover:border-cyan-500/30 transition-all duration-500 h-full cursor-pointer"
+                  onClick={() => {
+                    setSelectedProject(homeProjects[index]);
+                    setIsModalOpen(true);
+                  }}
+                >
                   <div className="relative h-56 overflow-hidden">
                     <Image
                       src={project.image || "/placeholder.svg"}
@@ -116,7 +128,7 @@ export default function ProjectsPage() {
                   </div>
 
                   <div className="p-6">
-                    <h3 className="text-xl font-semibold text-white mb-3 line-clamp-2">
+                    <h3 className="text-xl font-semibold text-white mb-3 line-clamp-2 group-hover:text-cyan-400">
                       {project.title}
                     </h3>
 
@@ -131,6 +143,7 @@ export default function ProjectsPage() {
                                 rel="noopener noreferrer"
                                 className="w-7 h-7 rounded-full overflow-hidden ring-2 ring-[#0f1724] border border-white/10"
                                 title={contributor.login}
+                                onClick={(e) => e.stopPropagation()}
                               >
                                 <img
                                   src={contributor.avatar_url}
@@ -165,6 +178,7 @@ export default function ProjectsPage() {
                           target="_blank"
                           rel="noopener noreferrer"
                           className="flex items-center gap-2 text-sm text-cyan-400 hover:text-cyan-300 transition-colors"
+                          onClick={(e) => e.stopPropagation()}
                         >
                           {t.common.readCaseStudy}
                           <ArrowRight className="w-4 h-4" />
@@ -176,6 +190,7 @@ export default function ProjectsPage() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 text-sm text-muted-foreground hover:text-white transition-colors"
+                        onClick={(e) => e.stopPropagation()}
                       >
                         {t.common.viewProject}
                         <ExternalLink className="w-4 h-4" />
@@ -186,6 +201,25 @@ export default function ProjectsPage() {
               </ScrollReveal>
             ))}
           </div>
+
+          {selectedProject && (
+            <PhoneMockupModal
+              isOpen={isModalOpen}
+              onClose={() => {
+                setIsModalOpen(false);
+                setSelectedProject(null);
+              }}
+              project={{
+                title: selectedProject.title[language],
+                description: selectedProject.description[language],
+                screenshots: selectedProject.screenshots,
+                image: selectedProject.image,
+                link: selectedProject.link,
+                repo: selectedProject.repo,
+                tags: selectedProject.tags,
+              }}
+            />
+          )}
         </div>
       </section>
     </main>

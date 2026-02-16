@@ -4,8 +4,31 @@ import React, { useEffect, useState } from "react";
 import { useLanguage } from "@/contexts/language-context";
 import { ExternalLink, Github } from "lucide-react";
 import Image from "next/image";
+import { PhoneMockupModal } from "./phone-mockup-modal";
 
-export const projects = [
+export interface ProjectScreenshot {
+  src: string;
+  alt?: string;
+}
+
+export interface Project {
+  title: {
+    pt: string;
+    en: string;
+  };
+  description: {
+    pt: string;
+    en: string;
+  };
+  image: string;
+  screenshots?: ProjectScreenshot[];
+  link: string;
+  repo?: string;
+  tags: string[];
+  category: string;
+}
+
+export const projects: Project[] = [
   {
     title: {
       pt: "SaaS de Agendamento para Clínicas Médicas",
@@ -16,6 +39,10 @@ export const projects = [
       en: "Complete scheduling system for medical clinics with administrative dashboard and patient management.",
     },
     image: "/images/drSchedule.svg",
+    screenshots: [
+      // { src: "/images/projects/dr-schedule/screenshot-1.png", alt: "Dashboard" },
+      // { src: "/images/projects/dr-schedule/screenshot-2.png", alt: "Agendamento" },
+    ],
     link: "https://doctor-schedule-oz7u.vercel.app/",
     repo: "Gildaciolopes/doctor-schedule",
     tags: [
@@ -27,8 +54,6 @@ export const projects = [
       "Drizzle",
     ],
     category: "web",
-    // repo do github é opcional, quando mostrado os contribuidores são buscados via API.
-    // repo: "owner/repo",
   },
   {
     title: {
@@ -40,6 +65,19 @@ export const projects = [
       en: "Online scheduling platform for barber shops with booking system and service management.",
     },
     image: "/images/FSW-Barber.png",
+    screenshots: [
+      { src: "/images/projects/fsw-barber/screenshot-1.png", alt: "Home" },
+      { src: "/images/projects/fsw-barber/screenshot-2.png", alt: "Barbearia" },
+      {
+        src: "/images/projects/fsw-barber/screenshot-3.png",
+        alt: "Fazer Reserva",
+      },
+      { src: "/images/projects/fsw-barber/screenshot-4.png", alt: "Sidebar" },
+      {
+        src: "/images/projects/fsw-barber/screenshot-5.png",
+        alt: "Agendamentos",
+      },
+    ],
     link: "https://fsw-barber-gules-five.vercel.app/",
     repo: "Gildaciolopes/fsw-barber",
     tags: [
@@ -62,6 +100,10 @@ export const projects = [
       en: "Self-service system for fast food restaurants with Stripe payment integration.",
     },
     image: "/images/FSW-Donalds.png",
+    screenshots: [
+      // { src: "/images/projects/fsw-donalds/screenshot-1.png", alt: "Menu" },
+      // { src: "/images/projects/fsw-donalds/screenshot-2.png", alt: "Checkout" },
+    ],
     link: "https://fullstackweek-donalds-eight.vercel.app/fsw-donalds",
     repo: "Gildaciolopes/fullstackweek-donalds",
     tags: [
@@ -81,6 +123,8 @@ export function ProjectsSection() {
   const [contributorsMap, setContributorsMap] = useState<
     Record<string, Array<any>>
   >({});
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const controllers: AbortController[] = [];
@@ -93,7 +137,7 @@ export function ProjectsSection() {
         if (!input) return null;
         try {
           const match = input.match(
-            /github\.com\/([^\/]+)\/([^\/]+)(?:\.git)?/i
+            /github\.com\/([^\/]+)\/([^\/]+)(?:\.git)?/i,
           );
           if (match) return `${match[1]}/${match[2].replace(/\.git$/i, "")}`;
           if (input.split("/").length === 2) return input;
@@ -149,8 +193,12 @@ export function ProjectsSection() {
         {projects.map((project, index) => (
           <div
             key={project.title.en}
-            className="group bg-[#12121a] rounded-2xl overflow-hidden border border-white/5 hover:border-cyan-500/30 transition-all duration-500"
+            className="group bg-[#12121a] rounded-2xl overflow-hidden border border-white/5 hover:border-cyan-500/30 transition-all duration-500 cursor-pointer"
             style={{ animationDelay: `${index * 100}ms` }}
+            onClick={() => {
+              setSelectedProject(project);
+              setIsModalOpen(true);
+            }}
           >
             <div className="relative h-48 overflow-hidden">
               <Image
@@ -194,6 +242,7 @@ export function ProjectsSection() {
                       rel="noopener noreferrer"
                       className="block w-8 h-8 rounded-full ring-2 ring-[#0f1724] overflow-hidden border border-white/10"
                       title={contributor.login}
+                      onClick={(e) => e.stopPropagation()}
                     >
                       <img
                         src={contributor.avatar_url}
@@ -215,6 +264,7 @@ export function ProjectsSection() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-cyan-400 group-hover:text-cyan-300 transition-colors"
+                  onClick={(e) => e.stopPropagation()}
                 >
                   {t.common.viewProject}
                   <ExternalLink className="w-4 h-4" />
@@ -231,6 +281,7 @@ export function ProjectsSection() {
                     rel="noopener noreferrer"
                     className="ml-2 text-muted-foreground hover:text-white transition-colors"
                     title="Repositório GitHub"
+                    onClick={(e) => e.stopPropagation()}
                   >
                     <Github className="w-4 h-4" />
                   </a>
@@ -240,6 +291,25 @@ export function ProjectsSection() {
           </div>
         ))}
       </div>
+
+      {selectedProject && (
+        <PhoneMockupModal
+          isOpen={isModalOpen}
+          onClose={() => {
+            setIsModalOpen(false);
+            setSelectedProject(null);
+          }}
+          project={{
+            title: selectedProject.title[language],
+            description: selectedProject.description[language],
+            screenshots: selectedProject.screenshots,
+            image: selectedProject.image,
+            link: selectedProject.link,
+            repo: selectedProject.repo,
+            tags: selectedProject.tags,
+          }}
+        />
+      )}
     </section>
   );
 }
