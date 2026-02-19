@@ -40,8 +40,14 @@ export const projects: Project[] = [
     },
     image: "/images/drSchedule.svg",
     screenshots: [
-      // { src: "/images/projects/dr-schedule/screenshot-1.png", alt: "Dashboard" },
-      // { src: "/images/projects/dr-schedule/screenshot-2.png", alt: "Agendamento" },
+      {
+        src: "/images/projects/dr-schedule/screenshot-1.png",
+        alt: "Dashboard",
+      },
+      {
+        src: "/images/projects/dr-schedule/screenshot-2.png",
+        alt: "Agendamento",
+      },
     ],
     link: "https://doctor-schedule-oz7u.vercel.app/",
     repo: "Gildaciolopes/doctor-schedule",
