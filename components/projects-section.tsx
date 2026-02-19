@@ -42,11 +42,11 @@ export const projects: Project[] = [
     screenshots: [
       {
         src: "/images/projects/dr-schedule/screenshot-1.png",
-        alt: "Dashboard",
+        alt: "Hero Section",
       },
       {
         src: "/images/projects/dr-schedule/screenshot-2.png",
-        alt: "Agendamento",
+        alt: "Authentication",
       },
     ],
     link: "https://doctor-schedule-oz7u.vercel.app/",
