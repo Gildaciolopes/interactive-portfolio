@@ -69,7 +69,7 @@ export default function HomePage() {
                 asChild
                 className="text-white border border-transparent rounded-full px-6 py-3 cursor-pointer transition-colors hover:text-white hover:bg-transparent! hover:border hover:border-white/70 text-md"
               >
-                <a href="/GildacioLopes_FullStack.pdf" download>
+                <a href="/Gildacio_Lopes_Desenvolvedor_Pleno.pdf" download>
                   <Download className="w-5 h-5 " />
                   {t.hero.cta.cv}
                 </a>
