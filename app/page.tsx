@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { DynamicIsland } from "@/components/dynamic-island";
 import { TerminalTyping } from "@/components/terminal-typing";
 import { GitHubActivity } from "@/components/github-activity";
@@ -15,13 +16,79 @@ import Image from "next/image";
 
 export default function HomePage() {
   const { t } = useLanguage();
+  const video1Ref = useRef<HTMLVideoElement>(null);
+  const video2Ref = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const v1 = video1Ref.current;
+    const v2 = video2Ref.current;
+    if (!v1 || !v2) return;
+
+    const CROSSFADE = 0.6; // segundos antes do fim para iniciar o fade
+    let transitioning = false;
+
+    const handleV1TimeUpdate = () => {
+      if (!v1.duration || transitioning) return;
+      if (v1.currentTime >= v1.duration - CROSSFADE) {
+        transitioning = true;
+        v2.currentTime = 0;
+        v2.play();
+        v2.style.opacity = "1";
+        setTimeout(() => {
+          transitioning = false;
+        }, 700);
+      }
+    };
+
+    const handleV2TimeUpdate = () => {
+      if (!v2.duration || transitioning) return;
+      if (v2.currentTime >= v2.duration - CROSSFADE) {
+        transitioning = true;
+        v1.currentTime = 0;
+        v1.play();
+        v2.style.opacity = "0";
+        setTimeout(() => {
+          transitioning = false;
+        }, 700);
+      }
+    };
+
+    v1.addEventListener("timeupdate", handleV1TimeUpdate);
+    v2.addEventListener("timeupdate", handleV2TimeUpdate);
+    return () => {
+      v1.removeEventListener("timeupdate", handleV1TimeUpdate);
+      v2.removeEventListener("timeupdate", handleV2TimeUpdate);
+    };
+  }, []);
 
   return (
     <main className="min-h-screen">
       <DynamicIsland />
 
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center px-4 md:px-8 lg:px-16 pt-24">
+      <section className="relative min-h-screen flex items-center px-4 md:px-8 lg:px-16 pt-24 overflow-hidden">
+        {/* Video Background */}
+        <video
+          ref={video1Ref}
+          autoPlay
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover -z-10"
+        >
+          <source src="/hero-bg.mp4" type="video/mp4" />
+        </video>
+        <video
+          ref={video2Ref}
+          muted
+          playsInline
+          style={{ opacity: 0, transition: "opacity 0.6s ease-in-out" }}
+          className="absolute inset-0 w-full h-full object-cover -z-10"
+        >
+          <source src="/hero-bg-reverse.mp4" type="video/mp4" />
+        </video>
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-[#0a0a0f]/70 -z-10" />
+
         <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="space-y-10">
