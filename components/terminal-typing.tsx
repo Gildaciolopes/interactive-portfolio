@@ -9,11 +9,7 @@ interface TerminalLine {
 }
 
 const codeLines: TerminalLine[] = [
-  {
-    type: "comment",
-    content: "// Full-Stack Developer Profile",
-    delay: 50,
-  },
+  { type: "comment", content: "// Full-Stack Developer Profile", delay: 50 },
   { type: "keyword", content: "", delay: 100 },
   { type: "const", content: "const FullStackDeveloper = {", delay: 30 },
   { type: "property", content: '  name: "Gildácio Lopes",', delay: 40 },
@@ -48,7 +44,7 @@ const codeLines: TerminalLine[] = [
   { type: "cursor", content: "}", delay: 0 },
 ];
 
-// Moved outside component so it's never recreated on re-renders
+// Outside component — never recreated on re-renders
 function renderLine(line: string, index: number): React.ReactNode {
   const renderBraces = (text: string) =>
     text.split("").map((ch, i) =>
@@ -148,8 +144,8 @@ function renderLine(line: string, index: number): React.ReactNode {
   return line;
 }
 
-// Memoized line — won't re-render after it's been shown
-const TerminalLineItem = memo(function TerminalLineItem({
+// Completed lines are memoized — won't re-render while other lines are still typing
+const CompletedLine = memo(function CompletedLine({
   lineContent,
   lineIndex,
 }: {
@@ -169,23 +165,39 @@ const TerminalLineItem = memo(function TerminalLineItem({
 });
 
 export function TerminalTyping() {
-  const [visibleCount, setVisibleCount] = useState(0);
+  const [displayedLines, setDisplayedLines] = useState<string[]>([]);
+  const [currentLineIndex, setCurrentLineIndex] = useState(0);
+  const [currentCharIndex, setCurrentCharIndex] = useState(0);
+  const [isTyping, setIsTyping] = useState(true);
 
   useEffect(() => {
-    if (visibleCount >= codeLines.length) return;
+    if (currentLineIndex >= codeLines.length) {
+      setIsTyping(false);
+      return;
+    }
 
-    const line = codeLines[visibleCount];
-    // Delay before this line appears, capped at 400ms per line
-    const delay =
-      line.content.length === 0
-        ? 150
-        : Math.min(line.content.length * (line.delay ?? 30), 400);
+    const currentLine = codeLines[currentLineIndex];
+    const lineContent = currentLine.content;
 
-    const timeout = setTimeout(() => setVisibleCount((v) => v + 1), delay);
-    return () => clearTimeout(timeout);
-  }, [visibleCount]);
-
-  const isDone = visibleCount >= codeLines.length;
+    if (currentCharIndex < lineContent.length) {
+      const timeout = setTimeout(() => {
+        setDisplayedLines((prev) => {
+          const next = [...prev];
+          next[currentLineIndex] = lineContent.slice(0, currentCharIndex + 1);
+          return next;
+        });
+        setCurrentCharIndex((prev) => prev + 1);
+      }, currentLine.delay ?? 30);
+      return () => clearTimeout(timeout);
+    } else {
+      const timeout = setTimeout(() => {
+        setCurrentLineIndex((prev) => prev + 1);
+        setCurrentCharIndex(0);
+        setDisplayedLines((prev) => [...prev, ""]);
+      }, 200);
+      return () => clearTimeout(timeout);
+    }
+  }, [currentLineIndex, currentCharIndex]);
 
   return (
     <div className="bg-[#1e1e2e] rounded-xl overflow-hidden border border-white/10 shadow-2xl w-full max-w-2xl">
@@ -206,19 +218,22 @@ export function TerminalTyping() {
       <div className="p-6 font-mono text-xs md:text-sm xl:text-base min-h-80">
         <div className="overflow-x-auto w-full">
           <div className="min-w-max">
-            {codeLines.slice(0, visibleCount).map((line, index) => (
-              <TerminalLineItem
-                key={index}
-                lineContent={line.content}
-                lineIndex={index}
-              />
+            {/* Completed lines — memoized, don't re-render per character */}
+            {displayedLines.slice(0, currentLineIndex).map((line, index) => (
+              <CompletedLine key={index} lineContent={line} lineIndex={index} />
             ))}
-            {!isDone && (
+
+            {/* Current line being typed — only this re-renders per character */}
+            {isTyping && currentLineIndex < codeLines.length && (
               <div className="flex">
                 <span className="text-muted-foreground w-10 text-right mr-4 select-none">
-                  {visibleCount + 1}
+                  {currentLineIndex + 1}
                 </span>
                 <span className="flex-1 whitespace-pre">
+                  {renderLine(
+                    displayedLines[currentLineIndex] ?? "",
+                    currentLineIndex,
+                  )}
                   <span className="typing-cursor text-white">|</span>
                 </span>
               </div>
