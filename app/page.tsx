@@ -81,6 +81,7 @@ export default function HomePage() {
           ref={video2Ref}
           muted
           playsInline
+          preload="none"
           style={{ opacity: 0, transition: "opacity 0.6s ease-in-out" }}
           className="absolute inset-0 w-full h-full object-cover -z-10"
         >

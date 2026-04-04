@@ -7,21 +7,21 @@ const glowPositions = [
   {
     top: "10%",
     left: "85%",
-    color: "rgba(139, 92, 246, 0.12)",
+    color: "rgba(139, 92, 246, 0.18)",
     size: 1000,
     delay: 0,
   },
   {
     top: "60%",
     left: "5%",
-    color: "rgba(168, 85, 247, 0.11)",
+    color: "rgba(168, 85, 247, 0.16)",
     size: 1100,
     delay: 4,
   },
   {
     bottom: "15%",
     right: "20%",
-    color: "rgba(139, 92, 246, 0.13)",
+    color: "rgba(139, 92, 246, 0.20)",
     size: 1300,
     delay: 1,
   },
@@ -64,11 +64,12 @@ export function CursorGlow() {
             bottom: glow.bottom,
             transform: "translate(-50%, -50%)",
             borderRadius: "50%",
-            background: `radial-gradient(circle, ${glow.color} 0%, transparent 70%)`,
-            filter: "blur(60px)",
-            opacity: 0.8,
+            background: `radial-gradient(circle, ${glow.color} 0%, transparent 65%)`,
+            opacity: 0.9,
             animation: `float ${8 + index * 2}s ease-in-out infinite`,
             animationDelay: `${glow.delay}s`,
+            willChange: "transform",
+            contain: "layout style",
           }}
         />
       ))}

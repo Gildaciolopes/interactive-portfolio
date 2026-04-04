@@ -211,6 +211,7 @@ export function ProjectsSection() {
                 src={project.image || "/placeholder.svg"}
                 alt={project.title[language]}
                 fill
+                loading="lazy"
                 className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-linear-to-t from-[#12121a] via-transparent to-transparent" />
@@ -253,6 +254,7 @@ export function ProjectsSection() {
                       <img
                         src={contributor.avatar_url}
                         alt={contributor.login}
+                        loading="lazy"
                         className="w-full h-full object-cover"
                       />
                     </a>

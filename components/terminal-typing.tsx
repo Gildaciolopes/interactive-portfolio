@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 
 interface TerminalLine {
   type: "comment" | "keyword" | "const" | "class" | "property" | "cursor";
@@ -48,142 +48,144 @@ const codeLines: TerminalLine[] = [
   { type: "cursor", content: "}", delay: 0 },
 ];
 
-export function TerminalTyping() {
-  const [displayedLines, setDisplayedLines] = useState<string[]>([]);
-  const [currentLineIndex, setCurrentLineIndex] = useState(0);
-  const [currentCharIndex, setCurrentCharIndex] = useState(0);
-  const [isTyping, setIsTyping] = useState(true);
+// Moved outside component so it's never recreated on re-renders
+function renderLine(line: string, index: number): React.ReactNode {
+  const renderBraces = (text: string) =>
+    text.split("").map((ch, i) =>
+      ch === "{" || ch === "}" ? (
+        <span key={i} className="text-purple-400">
+          {ch}
+        </span>
+      ) : (
+        <span key={i} className="text-white">
+          {ch}
+        </span>
+      ),
+    );
 
-  useEffect(() => {
-    if (currentLineIndex >= codeLines.length) {
-      setIsTyping(false);
-      return;
-    }
+  const originalLine = codeLines[index];
+  if (!originalLine) return line;
 
-    const currentLine = codeLines[currentLineIndex];
-    const lineContent = currentLine.content;
+  if (originalLine.type === "comment") {
+    return <span className="text-emerald-400/70 italic">{line}</span>;
+  }
 
-    if (currentCharIndex < lineContent.length) {
-      const timeout = setTimeout(() => {
-        setDisplayedLines((prev) => {
-          const newLines = [...prev];
-          newLines[currentLineIndex] = lineContent.slice(
-            0,
-            currentCharIndex + 1,
-          );
-          return newLines;
-        });
-        setCurrentCharIndex((prev) => prev + 1);
-      }, currentLine.delay || 30);
-      return () => clearTimeout(timeout);
-    } else {
-      const timeout = setTimeout(() => {
-        setCurrentLineIndex((prev) => prev + 1);
-        setCurrentCharIndex(0);
-        setDisplayedLines((prev) => [...prev, ""]);
-      }, 200);
-      return () => clearTimeout(timeout);
-    }
-  }, [currentLineIndex, currentCharIndex]);
-
-  function renderLine(line: string, index: number) {
-    const renderBraces = (text: string) =>
-      text.split("").map((ch, i) =>
-        ch === "{" || ch === "}" ? (
-          <span key={i} className="text-purple-400">
-            {ch}
-          </span>
-        ) : (
-          <span key={i} className="text-white">
-            {ch}
-          </span>
-        ),
+  if (originalLine.type === "const" || originalLine.type === "class") {
+    const match = line.match(/^(const|class)\s+(\w+)(?:\s*=\s*)?\s*(\{?)$/);
+    if (match) {
+      return (
+        <>
+          <span className="text-orange-400/70">{match[1]}</span>
+          <span className="text-cyan-300/90"> {match[2]}</span>
+          <span className="ml-1">{renderBraces(match[3] || "")}</span>
+        </>
       );
-
-    const originalLine = codeLines[index];
-    if (!originalLine) return line;
-
-    if (originalLine.type === "comment") {
-      return <span className="text-emerald-400/70 italic">{line}</span>;
     }
+    return <span className="text-white">{line}</span>;
+  }
 
-    if (originalLine.type === "const" || originalLine.type === "class") {
-      const match = line.match(/^(const|class)\s+(\w+)(?:\s*=\s*)?\s*(\{?)$/);
-      if (match) {
-        return (
-          <>
-            <span className="text-orange-400/70">{match[1]}</span>
-            <span className="text-cyan-300/90"> {match[2]}</span>
-            <span className="ml-1">{renderBraces(match[3] || "")}</span>
-          </>
-        );
-      }
-      return <span className="text-white">{line}</span>;
-    }
+  if (originalLine.type === "property") {
+    const match = line.match(/^(\s*)(\w+):\s*(.+?)([;,]?)$/);
+    if (match) {
+      const indent = match[1];
+      const key = match[2];
+      const value = match[3];
+      const terminator = match[4] || "";
 
-    if (originalLine.type === "property") {
-      const match = line.match(/^(\s*)(\w+):\s*(.+?)([;,]?)$/);
-      if (match) {
-        const indent = match[1];
-        const key = match[2];
-        const value = match[3];
-        const terminator = match[4] || "";
-
-        const renderValue = (val: string) => {
-          const leadingSpacesMatch = val.match(/^(\s*)/);
-          const leadingSpaces = leadingSpacesMatch ? leadingSpacesMatch[1] : "";
-          const rest = val.slice(leadingSpaces.length);
-          if (rest.startsWith("[") && rest.endsWith("]")) {
-            const inner = rest.slice(1, -1);
-            const tokens = inner.match(/"[^"]*"|,|[^,]+/g) || [];
-            return (
-              <>
-                <span className="text-white">{leadingSpaces}</span>
-                <span className="text-purple-400">[</span>
-                {tokens.map((tok, i) => {
-                  if (tok === ",") {
-                    return (
-                      <span key={i} className="text-white">
-                        {tok}
-                      </span>
-                    );
-                  }
-                  const leadMatch = tok.match(/^\s*/);
-                  const lead = leadMatch ? leadMatch[0] : "";
-                  const content = tok.slice(lead.length);
+      const renderValue = (val: string) => {
+        const leadingSpacesMatch = val.match(/^(\s*)/);
+        const leadingSpaces = leadingSpacesMatch ? leadingSpacesMatch[1] : "";
+        const rest = val.slice(leadingSpaces.length);
+        if (rest.startsWith("[") && rest.endsWith("]")) {
+          const inner = rest.slice(1, -1);
+          const tokens = inner.match(/"[^"]*"|,|[^,]+/g) || [];
+          return (
+            <>
+              <span className="text-white">{leadingSpaces}</span>
+              <span className="text-purple-400">[</span>
+              {tokens.map((tok, i) => {
+                if (tok === ",") {
                   return (
-                    <span key={i}>
-                      <span className="text-white">{lead}</span>
-                      <span className="text-green-400">{content}</span>
+                    <span key={i} className="text-white">
+                      {tok}
                     </span>
                   );
-                })}
-                <span className="text-purple-400">]</span>
-              </>
-            );
-          }
-          return <span className="text-green-400">{val}</span>;
-        };
+                }
+                const leadMatch = tok.match(/^\s*/);
+                const lead = leadMatch ? leadMatch[0] : "";
+                const content = tok.slice(lead.length);
+                return (
+                  <span key={i}>
+                    <span className="text-white">{lead}</span>
+                    <span className="text-green-400">{content}</span>
+                  </span>
+                );
+              })}
+              <span className="text-purple-400">]</span>
+            </>
+          );
+        }
+        return <span className="text-green-400">{val}</span>;
+      };
 
-        return (
-          <>
-            <span className="text-white">{indent}</span>
-            <span className="text-blue-300">{key}</span>
-            <span className="text-white">: </span>
-            {renderValue(value)}
-            <span className="text-white">{terminator}</span>
-          </>
-        );
-      }
-      return <span className="text-white">{line}</span>;
+      return (
+        <>
+          <span className="text-white">{indent}</span>
+          <span className="text-blue-300">{key}</span>
+          <span className="text-white">: </span>
+          {renderValue(value)}
+          <span className="text-white">{terminator}</span>
+        </>
+      );
     }
-
-    if (originalLine.type === "cursor") {
-      return <>{renderBraces(line)}</>;
-    }
-
-    return line;
+    return <span className="text-white">{line}</span>;
   }
+
+  if (originalLine.type === "cursor") {
+    return <>{renderBraces(line)}</>;
+  }
+
+  return line;
+}
+
+// Memoized line — won't re-render after it's been shown
+const TerminalLineItem = memo(function TerminalLineItem({
+  lineContent,
+  lineIndex,
+}: {
+  lineContent: string;
+  lineIndex: number;
+}) {
+  return (
+    <div className="flex">
+      <span className="text-muted-foreground w-10 text-right mr-4 select-none">
+        {lineIndex + 1}
+      </span>
+      <span className="flex-1 whitespace-pre">
+        {renderLine(lineContent, lineIndex)}
+      </span>
+    </div>
+  );
+});
+
+export function TerminalTyping() {
+  const [visibleCount, setVisibleCount] = useState(0);
+
+  useEffect(() => {
+    if (visibleCount >= codeLines.length) return;
+
+    const line = codeLines[visibleCount];
+    // Delay before this line appears, capped at 400ms per line
+    const delay =
+      line.content.length === 0
+        ? 150
+        : Math.min(line.content.length * (line.delay ?? 30), 400);
+
+    const timeout = setTimeout(() => setVisibleCount((v) => v + 1), delay);
+    return () => clearTimeout(timeout);
+  }, [visibleCount]);
+
+  const isDone = visibleCount >= codeLines.length;
 
   return (
     <div className="bg-[#1e1e2e] rounded-xl overflow-hidden border border-white/10 shadow-2xl w-full max-w-2xl">
@@ -204,20 +206,17 @@ export function TerminalTyping() {
       <div className="p-6 font-mono text-xs md:text-sm xl:text-base min-h-80">
         <div className="overflow-x-auto w-full">
           <div className="min-w-max">
-            {displayedLines.map((line, index) => (
-              <div key={index} className="flex">
-                <span className="text-muted-foreground w-10 text-right mr-4 select-none">
-                  {index + 1}
-                </span>
-                <span className="flex-1 whitespace-pre">
-                  {renderLine(line, index)}
-                </span>
-              </div>
+            {codeLines.slice(0, visibleCount).map((line, index) => (
+              <TerminalLineItem
+                key={index}
+                lineContent={line.content}
+                lineIndex={index}
+              />
             ))}
-            {isTyping && (
+            {!isDone && (
               <div className="flex">
                 <span className="text-muted-foreground w-10 text-right mr-4 select-none">
-                  {displayedLines.length + 1}
+                  {visibleCount + 1}
                 </span>
                 <span className="flex-1 whitespace-pre">
                   <span className="typing-cursor text-white">|</span>

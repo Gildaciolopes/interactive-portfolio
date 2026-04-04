@@ -1,6 +1,5 @@
 "use client";
 
-import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
 
 const stacks = [
@@ -24,57 +23,42 @@ const stacks = [
 ];
 
 export function StacksScroll() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [isPaused, setIsPaused] = useState(false);
-  const scrollPositionRef = useRef(0);
-
-  useEffect(() => {
-    const scrollContainer = scrollRef.current;
-    if (!scrollContainer) return;
-
-    let animationFrameId: number;
-
-    const scroll = () => {
-      if (!isPaused && scrollContainer) {
-        scrollPositionRef.current += 0.5;
-        if (scrollPositionRef.current >= scrollContainer.scrollWidth / 2) {
-          scrollPositionRef.current = 0;
-        }
-        scrollContainer.scrollLeft = scrollPositionRef.current;
-      }
-      animationFrameId = requestAnimationFrame(scroll);
-    };
-
-    animationFrameId = requestAnimationFrame(scroll);
-
-    return () => cancelAnimationFrame(animationFrameId);
-  }, [isPaused]);
-
   return (
-    <div
-      ref={scrollRef}
-      className="horizontal-scroll flex gap-4 overflow-x-auto py-4"
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
-      {[...stacks, ...stacks].map((stack, index) => (
-        <div
-          key={`${stack.name}-${index}`}
-          className="shrink-0 flex items-center gap-3 px-6 py-3 bg-[#1a1a24] rounded-full border border-white/10 hover:border-purple-500/50 transition-all duration-300 cursor-pointer hover:scale-105"
-        >
-          <div className="w-6 h-6 relative">
-            <Image
-              src={stack.icon}
-              alt={stack.name}
-              fill
-              className="object-contain rounded-xs"
-            />
+    <div className="overflow-hidden w-full" aria-label="Tech stack">
+      <div
+        className="flex gap-4 py-4 w-max"
+        style={{
+          animation: "stack-scroll 35s linear infinite",
+          willChange: "transform",
+        }}
+        onMouseEnter={(e) => {
+          (e.currentTarget as HTMLDivElement).style.animationPlayState =
+            "paused";
+        }}
+        onMouseLeave={(e) => {
+          (e.currentTarget as HTMLDivElement).style.animationPlayState =
+            "running";
+        }}
+      >
+        {[...stacks, ...stacks].map((stack, index) => (
+          <div
+            key={`${stack.name}-${index}`}
+            className="shrink-0 flex items-center gap-3 px-6 py-3 bg-[#1a1a24] rounded-full border border-white/10 hover:border-purple-500/50 transition-colors duration-300 cursor-pointer hover:scale-105"
+          >
+            <div className="w-6 h-6 relative">
+              <Image
+                src={stack.icon}
+                alt={stack.name}
+                fill
+                className="object-contain rounded-xs"
+              />
+            </div>
+            <span className="text-white font-medium whitespace-nowrap">
+              {stack.name}
+            </span>
           </div>
-          <span className="text-white font-medium whitespace-nowrap">
-            {stack.name}
-          </span>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

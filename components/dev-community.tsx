@@ -27,6 +27,7 @@ export function DevCommunity() {
           src="/images/banner-dev-comunity.png"
           alt="Servidor dos Programadores"
           fill
+          loading="lazy"
           className="object-cover"
         />
         <div className="absolute inset-0 bg-linear-to-t from-[#12121a] to-transparent" />

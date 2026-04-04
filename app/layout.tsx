@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { LanguageProvider } from "@/contexts/language-context";
-import { CursorGlow } from "@/components/cursor-glow";
 import { Toaster } from "@/components/ui/toaster";
 
 import {
@@ -67,7 +66,6 @@ export default function RootLayout({
         className={`font-sans antialiased bg-[#0a0a0f] text-white min-h-screen overflow-x-hidden`}
       >
         <LanguageProvider>
-          <CursorGlow />
           {children}
           <Toaster />
         </LanguageProvider>
