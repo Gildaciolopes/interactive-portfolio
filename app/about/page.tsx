@@ -444,7 +444,7 @@ export default function AboutPage() {
               <ScrollReveal delay={150}>
                 <div id="experience" className="space-y-6 scroll-mt-24">
                   <div className="flex items-center gap-3">
-                    <Briefcase className="w-6 h-6 text-cyan-400" />
+                    <Briefcase className="w-6 h-6 text-purple-400" />
                     <h2 className="text-3xl font-bold text-white">
                       {language === "pt"
                         ? "Experiência Profissional"
@@ -458,14 +458,14 @@ export default function AboutPage() {
                         key={idx}
                         className="relative pl-6 border-l-2 border-white/10"
                       >
-                        <div className="absolute -left-2.25 top-0 w-4 h-4 rounded-full bg-[#12121a] border-2 border-cyan-500" />
+                        <div className="absolute -left-2.25 top-0 w-4 h-4 rounded-full bg-[#12121a] border-2 border-purple-500" />
                         <div className="space-y-4">
                           <div className="flex items-start justify-between flex-wrap gap-2">
                             <div>
                               <h3 className="text-lg font-semibold text-white">
                                 {exp.company}
                               </h3>
-                              <p className="text-cyan-400 text-sm">
+                              <p className="text-purple-400 text-sm">
                                 {exp.role}
                               </p>
                             </div>
@@ -480,7 +480,7 @@ export default function AboutPage() {
                                 key={index}
                                 className="flex items-start gap-3"
                               >
-                                <span className="w-1 h-1 rounded-full bg-cyan-500 mt-2 shrink-0" />
+                                <span className="w-1 h-1 rounded-full bg-purple-500 mt-2 shrink-0" />
                                 <span className="text-sm text-muted-foreground">
                                   {achievement}
                                 </span>
@@ -498,7 +498,7 @@ export default function AboutPage() {
                                   rel="noopener noreferrer"
                                   className="group block shrink-0"
                                 >
-                                  <div className="relative w-full sm:w-64 rounded-xl overflow-hidden border border-white/10 hover:border-cyan-500/50 transition-all bg-white/5 backdrop-blur-sm">
+                                  <div className="relative w-full sm:w-64 rounded-xl overflow-hidden border border-white/10 hover:border-purple-500/50 transition-all bg-white/5 backdrop-blur-sm">
                                     <div className="relative w-full aspect-video">
                                       <Image
                                         src={img.src}
@@ -507,7 +507,7 @@ export default function AboutPage() {
                                         className="object-cover"
                                       />
                                     </div>
-                                    <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm rounded-full p-2 group-hover:bg-cyan-500/80 transition-colors">
+                                    <div className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm rounded-full p-2 group-hover:bg-purple-500/80 transition-colors">
                                       <ExternalLink className="w-4 h-4 text-white" />
                                     </div>
                                   </div>
@@ -526,7 +526,7 @@ export default function AboutPage() {
               <ScrollReveal delay={200}>
                 <div id="education" className="space-y-6 scroll-mt-24">
                   <div className="flex items-center gap-3">
-                    <GraduationCap className="w-6 h-6 text-green-400" />
+                    <GraduationCap className="w-6 h-6 text-purple-400" />
                     <h2 className="text-3xl font-bold text-white">
                       {language === "pt" ? "Formação Acadêmica" : "Education"}
                     </h2>
@@ -536,14 +536,14 @@ export default function AboutPage() {
                     {education.map((edu, idx) => (
                       <div
                         key={idx}
-                        className="bg-white/5 rounded-xl p-5 border border-white/10 hover:border-green-500/30 transition-colors"
+                        className="bg-white/5 rounded-xl p-5 border border-white/10 hover:border-purple-500/30 transition-colors"
                       >
                         <div className="flex items-start justify-between flex-wrap gap-2">
                           <div>
                             <h3 className="text-lg font-semibold text-white">
                               {edu.institution}
                             </h3>
-                            <p className="text-green-400 text-sm">
+                            <p className="text-purple-400 text-sm">
                               {edu.degree}
                             </p>
                           </div>
@@ -561,7 +561,7 @@ export default function AboutPage() {
               <ScrollReveal delay={250}>
                 <div id="certifications" className="space-y-6 scroll-mt-24">
                   <div className="flex items-center gap-3">
-                    <Award className="w-6 h-6 text-yellow-400" />
+                    <Award className="w-6 h-6 text-purple-400" />
                     <h2 className="text-3xl font-bold text-white">
                       {language === "pt" ? "Certificações" : "Certifications"}
                     </h2>
@@ -571,7 +571,7 @@ export default function AboutPage() {
                     {certifications.map((cert) => (
                       <div
                         key={cert}
-                        className="px-4 py-2 bg-yellow-500/10 border border-yellow-500/20 rounded-full text-sm text-yellow-300 hover:bg-yellow-500/20 transition-colors"
+                        className="px-4 py-2 bg-white/5 border border-white/10 hover:border-purple-500/20 rounded-full text-sm text-purple-400 transition-colors cursor-pointer"
                       >
                         {cert}
                       </div>
@@ -621,7 +621,7 @@ export default function AboutPage() {
                         ].map((tech) => (
                           <code
                             key={tech}
-                            className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-muted-foreground hover:border-cyan-500/50 hover:text-cyan-300 transition-colors"
+                            className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-muted-foreground hover:border-purple-500/50 hover:text-purple-300 transition-colors"
                           >
                             {tech}
                           </code>
@@ -639,7 +639,7 @@ export default function AboutPage() {
                           (tech) => (
                             <code
                               key={tech}
-                              className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-muted-foreground hover:border-green-500/50 hover:text-green-300 transition-colors"
+                              className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-muted-foreground hover:border-purple-500/50 hover:text-purple-300 transition-colors"
                             >
                               {tech}
                             </code>
@@ -658,7 +658,7 @@ export default function AboutPage() {
                           (tech) => (
                             <code
                               key={tech}
-                              className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-muted-foreground hover:border-yellow-500/50 hover:text-yellow-300 transition-colors"
+                              className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-muted-foreground hover:border-purple-500/50 hover:text-purple-300 transition-colors"
                             >
                               {tech}
                             </code>
@@ -680,7 +680,7 @@ export default function AboutPage() {
                         ].map((tech) => (
                           <code
                             key={tech}
-                            className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-muted-foreground hover:border-orange-500/50 hover:text-orange-300 transition-colors"
+                            className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-muted-foreground hover:border-purple-500/50 hover:text-purple-300 transition-colors"
                           >
                             {tech}
                           </code>
@@ -702,7 +702,7 @@ export default function AboutPage() {
                         ].map((tech) => (
                           <code
                             key={tech}
-                            className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-muted-foreground hover:border-pink-500/50 hover:text-pink-300 transition-colors"
+                            className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-muted-foreground hover:border-purple-500/50 hover:text-purple-300 transition-colors"
                           >
                             {tech}
                           </code>
