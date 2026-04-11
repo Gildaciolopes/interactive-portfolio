@@ -8,15 +8,7 @@ import { useLanguage } from "@/contexts/language-context";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Send,
-  Phone,
-  Mail,
-  MapPin,
-  Linkedin,
-  Github,
-  MessageCircle,
-} from "lucide-react";
+import { Send, MapPin, Linkedin, Github, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
 
@@ -88,59 +80,6 @@ export default function ContactPage() {
                 ? "Entre em contato para discutir projetos, oportunidades ou apenas para trocar uma ideia."
                 : "Get in touch to discuss projects, opportunities, or just to exchange ideas."}
             </p>
-          </ScrollReveal>
-
-          <ScrollReveal delay={50}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-              <a
-                href="tel:+5586998279477"
-                className="group relative overflow-hidden flex items-center gap-4 p-5 bg-linear-to-br from-white/5 to-white/2 rounded-2xl border border-white/10 hover:border-purple-500/50 transition-all duration-300"
-              >
-                <div className="absolute inset-0 bg-linear-to-br from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative w-14 h-14 rounded-xl bg-linear-to-br from-purple-500/20 to-purple-600/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <Phone className="w-6 h-6 text-purple-400" />
-                </div>
-                <div className="relative">
-                  <p className="text-sm text-muted-foreground mb-1">
-                    {language === "pt" ? "Telefone" : "Phone"}
-                  </p>
-                  <p className="text-white font-semibold">
-                    +55 (86) 99827-9477
-                  </p>
-                </div>
-              </a>
-
-              <a
-                href="mailto:contato.gildaciolopes@gmail.com"
-                className="group relative overflow-hidden flex items-center gap-4 p-5 bg-linear-to-br from-white/5 to-white/2 rounded-2xl border border-white/10 hover:border-cyan-500/50 transition-all duration-300"
-              >
-                <div className="absolute inset-0 bg-linear-to-br from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="relative w-14 h-14 rounded-xl bg-linear-to-br from-cyan-500/20 to-cyan-600/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                  <Mail className="w-6 h-6 text-cyan-400" />
-                </div>
-                <div className="relative min-w-0">
-                  <p className="text-sm text-muted-foreground mb-1">Email</p>
-                  <p className="text-white font-semibold text-sm md:text-base wrap-break-word whitespace-normal">
-                    contato.gildaciolopes@gmail.com
-                  </p>
-                </div>
-              </a>
-
-              <div className="group relative overflow-hidden flex items-center gap-4 p-5 bg-linear-to-br from-white/5 to-white/2 rounded-2xl border border-white/10 hover:border-green-500/50 transition-all duration-300">
-                <div className="absolute inset-0 bg-linear-to-br from-green-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <div className="w-14 h-14 rounded-xl bg-linear-to-br from-green-500/20 to-green-600/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <MapPin className="w-6 h-6 text-green-400" />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground mb-1">
-                    {language === "pt" ? "Localização" : "Location"}
-                  </p>
-                  <p className="text-white font-semibold">
-                    Teresina, PI - Brasil
-                  </p>
-                </div>
-              </div>
-            </div>
           </ScrollReveal>
 
           <ScrollReveal delay={100}>
