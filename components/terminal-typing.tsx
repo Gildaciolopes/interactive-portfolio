@@ -15,7 +15,7 @@ const codeLines: TerminalLine[] = [
   { type: "property", content: '  name: "Gildácio Lopes",', delay: 40 },
   { type: "property", content: '  role: "Full Stack Developer",', delay: 40 },
   { type: "property", content: '  company: "Visão Coop",', delay: 40 },
-  { type: "property", content: '  experience: "3+ years",', delay: 40 },
+  { type: "property", content: '  experience: "+4 years",', delay: 40 },
   { type: "property", content: '  location: "Teresina, PI",', delay: 40 },
   { type: "property", content: '  birth: "25 de Dezembro, 2006",', delay: 40 },
   { type: "cursor", content: "}", delay: 0 },
@@ -28,7 +28,7 @@ const codeLines: TerminalLine[] = [
   },
   {
     type: "property",
-    content: '  backend: ["Node.js", "Express", "NestJS", "C#"],',
+    content: '  backend: ["Node.js", "NestJS", "Django"],',
     delay: 40,
   },
   {

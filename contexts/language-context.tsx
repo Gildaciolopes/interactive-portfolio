@@ -75,7 +75,7 @@ const translations: Record<Language, Translations> = {
       greeting: "I'm",
       role: "Mid-Level Full Stack Developer at",
       experience:
-        "With 3+ years of experience, building high-performance web and mobile solutions for SaaS & General Softwares.",
+        "With +4 years of experience, building high-performance web and mobile solutions for SaaS & General Softwares.",
       cta: {
         projects: "View Projects",
         cv: "Download CV",
@@ -93,7 +93,7 @@ const translations: Record<Language, Translations> = {
     about: {
       title: "Gildácio Lopes",
       role: "Full Stack Developer",
-      bio: "I'm a Full-Stack Developer with 3 years of experience, specialized in creating solutions that simplify processes and maximize results, solving problems in an intuitive and impactful way for companies and users. Currently working at Visão Coop, developing complete web applications with React.js, TypeScript and Python/Django, with a collaborative and problem-solving approach.",
+      bio: "I'm a Full-Stack Developer with 4 years of experience, specialized in creating solutions that simplify processes and maximize results, solving problems in an intuitive and impactful way for companies and users. Currently working at Visão Coop, developing complete web applications with React.js, TypeScript and Python/Django, with a collaborative and problem-solving approach.",
       currentRole: "Current Role",
       introduction: "Introduction",
       studies: "Education & Certifications",
@@ -130,7 +130,7 @@ const translations: Record<Language, Translations> = {
       greeting: "Eu sou",
       role: "Desenvolvedor Full Stack Pleno na",
       experience:
-        "Com 3+ anos de experiência, construindo soluções web e mobile de alta performance para SaaS & Softwares em geral.",
+        "Com +4 anos de experiência, construindo soluções web e mobile de alta performance para SaaS & Softwares em geral.",
       cta: {
         projects: "Ver Projetos",
         cv: "Baixar CV",
@@ -148,7 +148,7 @@ const translations: Record<Language, Translations> = {
     about: {
       title: "Gildácio Lopes",
       role: "Desenvolvedor Full Stack",
-      bio: "Sou um Desenvolvedor Full-Stack com 3 anos de experiência, especializado em criar soluções que simplificam processos e maximizam resultados, solucionando problemas de forma intuitiva e impactante para empresas e usuários. Atualmente estou trabalhando na Visão Coop, desenvolvendo aplicações web completas com React.js, TypeScript e Python/Django, com uma abordagem colaborativa e orientada à resolução de problemas.",
+      bio: "Sou um Desenvolvedor Full-Stack com 4 anos de experiência, especializado em criar soluções que simplificam processos e maximizam resultados, solucionando problemas de forma intuitiva e impactante para empresas e usuários. Atualmente estou trabalhando na Visão Coop, desenvolvendo aplicações web completas com React.js, TypeScript e Python/Django, com uma abordagem colaborativa e orientada à resolução de problemas.",
       currentRole: "Função Atual",
       introduction: "Introdução",
       studies: "Formação & Certificações",
@@ -179,7 +179,7 @@ interface LanguageContextType {
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
