@@ -632,7 +632,7 @@ export default function AboutPage() {
                           : "Languages & Technologies"}
                       </h4>
                       <div className="flex flex-wrap gap-2">
-                        {["JavaScript", "TypeScript", "C#"].map((tech) => (
+                        {["JavaScript", "TypeScript", "Python"].map((tech) => (
                           <code
                             key={tech}
                             className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-muted-foreground hover:border-purple-500/50 hover:text-purple-300 transition-colors"
@@ -652,8 +652,9 @@ export default function AboutPage() {
                           "React",
                           "React Native",
                           "Node.js",
-                          "Express",
                           "Nest.js",
+                          "Django",
+                          "FastAPI",
                         ].map((tech) => (
                           <code
                             key={tech}
@@ -671,16 +672,21 @@ export default function AboutPage() {
                           : "Databases & ORM"}
                       </h4>
                       <div className="flex flex-wrap gap-2">
-                        {["PostgreSQL", "Prisma", "Drizzle", "MongoDB"].map(
-                          (tech) => (
-                            <code
-                              key={tech}
-                              className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-muted-foreground hover:border-purple-500/50 hover:text-purple-300 transition-colors"
-                            >
-                              {tech}
-                            </code>
-                          ),
-                        )}
+                        {[
+                          "PostgreSQL",
+                          "Prisma",
+                          ,
+                          "TypeORM",
+                          "Drizzle",
+                          "MongoDB",
+                        ].map((tech) => (
+                          <code
+                            key={tech}
+                            className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-muted-foreground hover:border-purple-500/50 hover:text-purple-300 transition-colors"
+                          >
+                            {tech}
+                          </code>
+                        ))}
                       </div>
                     </div>
                     <div>
@@ -707,13 +713,7 @@ export default function AboutPage() {
                         CI/CD & DevOps
                       </h4>
                       <div className="flex flex-wrap gap-2">
-                        {[
-                          "GitHub Actions",
-                          "Docker",
-                          "Netlify",
-                          "Vercel",
-                          "AWS",
-                        ].map((tech) => (
+                        {["GitHub Actions", "Docker", "AWS"].map((tech) => (
                           <code
                             key={tech}
                             className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-sm text-muted-foreground hover:border-purple-500/50 hover:text-purple-300 transition-colors"
@@ -729,12 +729,12 @@ export default function AboutPage() {
                       </h4>
                       <div className="flex flex-wrap gap-2">
                         {[
-                          "API REST",
                           "Webhooks",
-                          "OAuth2",
-                          "JWT",
+                          "WebSockets",
+                          "Google OAuth",
                           "Stripe",
-                          "Swagger",
+                          "AbacatePay",
+                          "Firebase",
                         ].map((tech) => (
                           <code
                             key={tech}
