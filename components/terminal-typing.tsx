@@ -14,7 +14,7 @@ const codeLines: TerminalLine[] = [
   { type: "const", content: "const FullStackDeveloper = {", delay: 30 },
   { type: "property", content: '  name: "Gildácio Lopes",', delay: 40 },
   { type: "property", content: '  role: "Full Stack Developer",', delay: 40 },
-  { type: "property", content: '  company: "Medsafe Brasil",', delay: 40 },
+  { type: "property", content: '  company: "Visão Coop",', delay: 40 },
   { type: "property", content: '  experience: "3+ years",', delay: 40 },
   { type: "property", content: '  location: "Teresina, PI",', delay: 40 },
   { type: "property", content: '  birth: "25 de Dezembro, 2006",', delay: 40 },

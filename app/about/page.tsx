@@ -23,9 +23,28 @@ import { PopupModal } from "react-calendly";
 const experiencesData = {
   en: [
     {
+      company: "Visão Coop",
+      role: "Mid-Level Full Stack Developer",
+      period: "Feb 2026 - Present",
+      images: [
+        {
+          src: "/images/visao-about.jpg",
+          link: "https://visao.coop",
+        },
+      ],
+      achievements: [
+        "Visão Coop is a Brazilian initiative that connects communities through social technologies and collective intelligence, focusing on climate adaptation, creative economy, and public policy",
+        "Responsible for the development and maintenance of complete web applications, working from the interface to the infrastructure",
+        "Built modern and responsive interfaces using React.js with Vite and TypeScript, styled with TailwindCSS",
+        "Integrated the front-end with a back-end developed in Python/Django, ensuring efficient communication between the application layers",
+        "On the infrastructure side, worked with AWS S3 for file storage and AWS RDS with PostgreSQL as the relational database, in addition to using Docker for service containerization",
+        "Implemented CI/CD pipelines with GitHub Actions, automating build, testing, and continuous deployment processes",
+      ],
+    },
+    {
       company: "Medsafe Brasil",
       role: "Mid-Level Full Stack Developer",
-      period: "Oct 2025 - Present",
+      period: "Oct 2025 - Jul 2026",
       images: [
         {
           src: "/images/medsafe-about.png",
@@ -80,9 +99,28 @@ const experiencesData = {
   ],
   pt: [
     {
+      company: "Visão Coop",
+      role: "Desenvolvedor Full Stack Pleno",
+      period: "Fev 2026 - Presente",
+      images: [
+        {
+          src: "/images/visao-about.jpg",
+          link: "https://visao.coop",
+        },
+      ],
+      achievements: [
+        "A Visão Coop é uma iniciativa brasileira que conecta comunidades, por meio de tecnologias sociais e inteligência coletiva, com foco em adaptação climática, economia criativa e políticas públicas",
+        "Fui responsável pelo desenvolvimento e manutenção de aplicações web completas, atuando desde a interface até a infraestrutura",
+        "Construí interfaces modernas e responsivas utilizando React.js com Vite e TypeScript, estilizadas com TailwindCSS",
+        "Realizei a integração do front-end com um back-end desenvolvido em Python/Django, garantindo comunicação eficiente entre as camadas da aplicação",
+        "Na parte de infraestrutura, trabalhei com AWS S3 para armazenamento de arquivos e AWS RDS com PostgreSQL como banco de dados relacional, além de utilizar Docker para containerização dos serviços",
+        "Implementei pipelines de CI/CD com GitHub Actions, automatizando processos de build, testes e deploy contínuo",
+      ],
+    },
+    {
       company: "Medsafe Brasil",
       role: "Desenvolvedor Full Stack Pleno",
-      period: "Out 2025 - Presente",
+      period: "Out 2025 - Jul 2026",
       images: [
         {
           src: "/images/medsafe-about.png",

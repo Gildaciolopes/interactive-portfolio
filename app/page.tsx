@@ -107,12 +107,12 @@ export default function HomePage() {
               <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
                 {t.hero.role}{" "}
                 <a
-                  href="https://medsafebrasil.com.br"
+                  href="https://visao.coop"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <code className="px-2 py-1 bg-white/10 text-base md:text-lg rounded text-white hover:text-purple-400 transition-colors">
-                    Medsafe Brasil
+                    Visão Coop
                   </code>
                 </a>
               </p>
