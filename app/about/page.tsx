@@ -33,7 +33,6 @@ const experiencesData = {
         },
       ],
       achievements: [
-        "Visão Coop is a Brazilian initiative that connects communities through social technologies and collective intelligence, focusing on climate adaptation, creative economy, and public policy",
         "Responsible for the development and maintenance of complete web applications, working from the interface to the infrastructure",
         "Built modern and responsive interfaces using React.js with Vite and TypeScript, styled with TailwindCSS",
         "Integrated the front-end with a back-end developed in Python/Django, ensuring efficient communication between the application layers",
@@ -109,7 +108,6 @@ const experiencesData = {
         },
       ],
       achievements: [
-        "A Visão Coop é uma iniciativa brasileira que conecta comunidades, por meio de tecnologias sociais e inteligência coletiva, com foco em adaptação climática, economia criativa e políticas públicas",
         "Fui responsável pelo desenvolvimento e manutenção de aplicações web completas, atuando desde a interface até a infraestrutura",
         "Construí interfaces modernas e responsivas utilizando React.js com Vite e TypeScript, estilizadas com TailwindCSS",
         "Realizei a integração do front-end com um back-end desenvolvido em Python/Django, garantindo comunicação eficiente entre as camadas da aplicação",
