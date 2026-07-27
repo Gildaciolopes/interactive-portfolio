@@ -69,6 +69,15 @@ export function GitHubActivity() {
 
   return (
     <div className="bg-[#12121a] rounded-2xl overflow-hidden border border-white/5 hover:border-purple-500/30 transition-all duration-300">
+      {/* cada quadradinho cresce do próprio centro com leve overshoot ("pop"),
+          escalonado na diagonal — mesma animação do heatmap do README */}
+      <style>{`
+        @keyframes cellPop {
+          0%   { opacity: 0; transform: scale(0.1); }
+          72%  { opacity: 1; transform: scale(1.15); }
+          100% { opacity: 1; transform: scale(1); }
+        }
+      `}</style>
       <div className="flex items-center gap-3 p-6 pb-0">
         <Github className="w-6 h-6 text-white" />
         <h3 className="text-lg font-semibold text-white">
@@ -90,6 +99,10 @@ export function GitHubActivity() {
                     className={`${getColor(
                       day.contributionCount
                     )} w-4 h-4 rounded-xs transition-all duration-200 hover:scale-110`}
+                    style={{
+                      animation: "cellPop 0.42s ease-out backwards",
+                      animationDelay: `${weekIndex * 0.018 + dayIndex * 0.045}s`,
+                    }}
                   />
                 ))}
               </div>
